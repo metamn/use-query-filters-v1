@@ -16,6 +16,8 @@ import {
   DelimitedNumericArrayParam
 } from "use-query-params";
 
+import Filter, { FilterDefaultProps, FilterPropTypes } from "../Filter";
+
 /**
  * Defines the prop types
  */
@@ -115,7 +117,14 @@ const Filters = props => {
   const availableQueryParams = getQueryParamsFromFilters({ filters: filters });
   console.log("a", availableQueryParams);
 
-  return <div className="Filters">Filters: {filters.length}</div>;
+  return (
+    <div className="Filters">
+      {filters &&
+        filters.map((filter, index) => {
+          return <Filter key={index} {...filter} />;
+        })}
+    </div>
+  );
 };
 
 Filters.propTypes = propTypes;
