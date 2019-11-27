@@ -2,31 +2,23 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import useSWR from "swr";
-import {
-  useQueryParams,
-  StringParam,
-  NumberParam,
-  ObjectParam,
-  ArrayParam,
-  JsonParam,
-  DateParam,
-  BooleanParam,
-  NumericObjectParam,
-  DelimitedArrayParam,
-  DelimitedNumericArrayParam
-} from "use-query-params";
 
+import { getQueryParamsFromFilters } from "../../hooks";
 import Filter, { FilterDefaultProps, FilterPropTypes } from "../Filter";
 
 /**
  * Defines the prop types
  */
-const propTypes = {};
+const propTypes = {
+  filtersURL: PropTypes.string
+};
 
 /**
  * Defines the default props
  */
-const defaultProps = {};
+const defaultProps = {
+  filtersURL: "http://localhost:3001/filters"
+};
 
 /**
  * Defines a fetcher for useSWR to comply with CORS coming from json-server
@@ -34,88 +26,22 @@ const defaultProps = {};
 const fetcher = url => fetch(url).then(r => r.json());
 
 /**
- * Returns a query param type object from a string
- *
- * @see https://github.com/pbeshai/use-query-params#param-types
- */
-const convertStringToQueryParamObject = props => {
-  const { type } = props;
-
-  /**
-   * One of these objects will be returned ...
-   */
-  const objects = [
-    StringParam,
-    NumberParam,
-    ArrayParam,
-    JsonParam,
-    DateParam,
-    BooleanParam,
-    NumericObjectParam,
-    DelimitedArrayParam,
-    DelimitedNumericArrayParam
-  ];
-
-  /**
-   * ... when `type` matches one of these strings
-   */
-  const strings = [
-    "StringParam",
-    "NumberParam",
-    "ArrayParam",
-    "JsonParam",
-    "DateParam",
-    "BooleanParam",
-    "NumericObjectParam",
-    "DelimitedArrayParam",
-    "DelimitedNumericArrayParam"
-  ];
-
-  return objects[strings.indexOf(type)];
-};
-
-/**
- * Collects the query params from filters
- *
- * @see App.json for the filters syntax
- */
-const getQueryParamsFromFilters = props => {
-  const { filters } = props;
-
-  let results = [];
-
-  filters
-    .filter(item => item.queryParam)
-    .map(item => item.queryParam)
-    .map(item => {
-      const { name, type } = item;
-      results[name] = convertStringToQueryParamObject({ type: type });
-    });
-
-  return results;
-};
-
-/**
  * Displays the component
  */
 const Filters = props => {
-  const { data: filters, error } = useSWR(
-    "http://localhost:3001/filters",
-    fetcher
-  );
+  const { filtersURL } = props;
 
-  if (error) return <div>failed to load</div>;
-  if (!filters) return <div>loading...</div>;
-
-  console.log("filters:", filters);
-  console.log("tf:", typeof filters);
+  const { data: filters, error } = useSWR(filtersURL, fetcher);
+  if (error) return <div>Failed to load data from {filtersURL}</div>;
+  if (!filters) return <div>Loading...</div>;
 
   /**
    * Gets all available query params from filters
    * - As a safety measure only these query params will be usable in the URL
    */
-  const availableQueryParams = getQueryParamsFromFilters({ filters: filters });
-  console.log("a", availableQueryParams);
+  const queryParamsFromFilters = getQueryParamsFromFilters({
+    filters: filters
+  });
 
   return (
     <div className="Filters">

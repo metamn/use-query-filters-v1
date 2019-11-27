@@ -10,6 +10,12 @@ React hook to manage search filters and URL query parameters
 4. When a filter is modified the query params are updated in the URL and a request is made to the backend to return the results based on the filters.
 5. Displays the results.
 
+## How to run
+
+```
+json-server src/App.json --watch --port=3001
+```
+
 ## Built on
 
 - Create React App

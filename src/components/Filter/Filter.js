@@ -4,7 +4,9 @@ import PropTypes from "prop-types";
 /**
  * Defines the prop types
  */
-const propTypes = {};
+const propTypes = {
+  name: PropTypes.string
+};
 
 /**
  * Defines the default props
