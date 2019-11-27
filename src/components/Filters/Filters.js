@@ -84,8 +84,6 @@ const Filters = props => {
     );
   }, [filters]);
 
-  console.log("qpf:", queryParamsFromFilters);
-
   /**
    * Sets up state to manage the query params
    */
@@ -116,6 +114,7 @@ const Filters = props => {
       <div className="Home">
         <a href="http://localhost:3000/">Home</a>
       </div>
+
       <div className="Filters">
         {filters &&
           filters.map((filter, index) => {
