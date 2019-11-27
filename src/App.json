@@ -13,11 +13,13 @@
         "items": [
           {
             "label": "Canada",
-            "queryValue": "ca"
+            "queryValue": "ca",
+            "isChecked": false
           },
           {
             "label": "Mexico",
-            "queryValue": "mx"
+            "queryValue": "mx",
+            "isChecked": false
           }
         ]
       }

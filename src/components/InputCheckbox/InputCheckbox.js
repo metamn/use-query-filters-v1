@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 
 /**
@@ -10,9 +10,11 @@ const propTypes = {
   items: PropTypes.arrayOf(
     PropTypes.shape({
       label: PropTypes.string,
-      queryValue: PropTypes.string
+      queryValue: PropTypes.string,
+      isChecked: PropTypes.bool
     })
-  )
+  ),
+  defaultChangeHandler: PropTypes.func
 };
 
 /**
@@ -23,19 +25,42 @@ const defaultProps = {
   label: "Input checkbox",
   items: [
     {
-      label: "Chekcbox 1",
-      queryValue: "checkbox-1"
+      label: "Checkbox 1",
+      queryValue: "checkbox-1",
+      isChecked: false
     }
-  ]
+  ],
+  defaultChangeHandler: () => {
+    console.log("InputCheckbox handleChange");
+  }
 };
 
 /**
  * Displays the component
  *
  * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/checkbox
+ * @see https://reactjs.org/docs/forms.html#handling-multiple-inputs
  */
 const InputCheckbox = props => {
   const { name, label, items } = props;
+
+  /**
+   * Uses a state to handle the checked status of items
+   */
+  const [checkedItems, setCheckedItems] = useState({});
+
+  /**
+   * Handles the checked value change
+   */
+  const handleChange = event => {
+    const { target } = event;
+    const { checked, id } = target;
+
+    setCheckedItems({
+      ...checkedItems,
+      [id]: checked
+    });
+  };
 
   return (
     <div className="InputCheckbox">
@@ -43,11 +68,17 @@ const InputCheckbox = props => {
       <div className="Items">
         {items &&
           items.map((item, index) => {
-            const { label: itemLabel } = item;
+            const { label: itemLabel, queryValue } = item;
 
             return (
               <div className="Checkbox" key={index}>
-                <input type="checkbox" id="scales" name={name} checked />
+                <input
+                  type="checkbox"
+                  id={queryValue}
+                  name={name}
+                  checked={checkedItems[queryValue]}
+                  onChange={event => handleChange(event)}
+                />
                 <label htmlFor={name}>{itemLabel}</label>
               </div>
             );
