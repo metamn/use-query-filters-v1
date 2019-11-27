@@ -27,18 +27,42 @@ const defaultProps = {
  */
 const Filter = props => {
   const { title, queryParam, input } = props;
-  const { type } = input;
+  const { type, items } = input;
   const { name } = queryParam;
 
-  let inputProps = {
-    type: type,
-    name: name,
-    label: title
+  let commonProps = {
+    type: type
   };
+
+  let specialProps = {};
+
+  switch (type) {
+    case "text":
+      specialProps = {
+        inputText: {
+          name: name,
+          label: title
+        }
+      };
+      break;
+
+    case "checkbox":
+      specialProps = {
+        inputCheckbox: {
+          name: name,
+          label: title,
+          items: items
+        }
+      };
+      break;
+
+    default:
+      break;
+  }
 
   return (
     <div className="Filter">
-      <Input {...inputProps} />
+      <Input {...commonProps} {...specialProps} />
     </div>
   );
 };

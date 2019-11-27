@@ -19,12 +19,12 @@ const propTypes = {
  * Defines the default props
  */
 const defaultProps = {
-  name: "location",
-  label: "Location",
+  name: "input-checkbox",
+  label: "Input checkbox",
   items: [
     {
-      label: "Location 1",
-      queryValue: "location-1"
+      label: "Chekcbox 1",
+      queryValue: "checkbox-1"
     }
   ]
 };

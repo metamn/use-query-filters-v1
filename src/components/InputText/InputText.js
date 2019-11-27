@@ -13,8 +13,8 @@ const propTypes = {
  * Defines the default props
  */
 const defaultProps = {
-  name: "q",
-  label: "Search"
+  name: "input-text",
+  label: "Input text"
 };
 
 /**

@@ -15,14 +15,8 @@ import InputCheckbox, {
  */
 const propTypes = {
   type: PropTypes.oneOf(["text", "checkbox"]),
-  name: PropTypes.string,
-  label: PropTypes.string,
-  items: PropTypes.arrayOf(
-    PropTypes.shape({
-      label: PropTypes.string,
-      queryValue: PropTypes.string
-    })
-  )
+  inputText: PropTypes.shape(InputTextPropTypes),
+  inputCheckbox: PropTypes.shape(InputCheckboxPropTypes)
 };
 
 /**
@@ -30,31 +24,25 @@ const propTypes = {
  */
 const defaultProps = {
   type: "text",
-  name: "q",
-  label: "Search",
-  items: [
-    {
-      label: "Item 1",
-      queryValue: "item-1"
-    }
-  ]
+  inputText: InputTextDefaultProps,
+  inputCheckbox: InputCheckboxDefaultProps
 };
 
 /**
  * Displays the component
  */
 const Input = props => {
-  const { type } = props;
+  const { type, inputText, inputCheckbox } = props;
 
   let input = "";
 
   switch (type) {
     case "text":
-      input = <InputText {...props} />;
+      input = <InputText {...inputText} />;
       break;
 
     case "checkbox":
-      input = <InputCheckbox {...props} />;
+      input = <InputCheckbox {...inputCheckbox} />;
       break;
 
     default:
