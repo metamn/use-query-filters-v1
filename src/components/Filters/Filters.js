@@ -86,14 +86,22 @@ const Filters = props => {
 
   /**
    * Sets up state to manage the query params
+   *
+   * This one is tricky: the first initialization sets up the whitelist, all next modifications sets up the query params.
+   *
+   * Therefore useQueryParams must be initialized only once (no useEffect) with the final data
+   *
+   * @see https://github.com/pbeshai/use-query-params
    */
   const [queryParams, setQueryParams] = useQueryParams({});
 
+  /**
   useEffect(() => {
     if (queryParamsFromFilters !== undefined) {
-      setQueryParams(queryParamsFromFilters);
+      setQueryParams(queryParamsFromFilters); // This causes the error
     }
   }, [queryParamsFromFilters]);
+*/
 
   const queryParamsContextValue = {
     queryParams: queryParams,
