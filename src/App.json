@@ -3,7 +3,7 @@
     {
       "title": "Search",
       "queryParam": { "name": "q", "type": "StringParam" },
-      "input": { "type": "text" }
+      "input": { "type": "text", "defaultValue": "" }
     },
     {
       "title": "Location",

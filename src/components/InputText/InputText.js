@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 
 /**
@@ -6,7 +6,9 @@ import PropTypes from "prop-types";
  */
 const propTypes = {
   name: PropTypes.string,
-  label: PropTypes.string
+  label: PropTypes.string,
+  defaultValue: PropTypes.string,
+  defaultChangeHandler: PropTypes.func
 };
 
 /**
@@ -14,22 +16,41 @@ const propTypes = {
  */
 const defaultProps = {
   name: "input-text",
-  label: "Input text"
+  label: "Input text",
+  defaultValue: "Default value",
+  defaultChangeHandler: () => {
+    console.log("InputText handleChange");
+  }
 };
 
 /**
  * Displays the component
  *
  * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/text
+ * @see https://reactjs.org/docs/forms.html
  */
 const InputText = props => {
-  const { name, label } = props;
+  const { name, label, defaultValue } = props;
+
+  /**
+   * Uses a state to handle the value change
+   */
+  const [value, setValue] = useState(defaultValue);
+
+  /**
+   * Handles the input value change
+   */
+  const handleChange = event => {
+    const { value } = event.target.value;
+
+    setValue(value);
+  };
 
   return (
     <div className="InputText">
       <label htmlFor={name}>{label}</label>
 
-      <input type="text" id="name" name={name} />
+      <input type="text" name={name} value={value} onChange={handleChange} />
     </div>
   );
 };

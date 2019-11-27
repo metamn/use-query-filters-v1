@@ -46,10 +46,10 @@ const InputCheckbox = props => {
             const { label: itemLabel } = item;
 
             return (
-              <>
+              <div className="Checkbox" key={index}>
                 <input type="checkbox" id="scales" name={name} checked />
                 <label htmlFor={name}>{itemLabel}</label>
-              </>
+              </div>
             );
           })}
       </div>

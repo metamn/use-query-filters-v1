@@ -27,7 +27,7 @@ const defaultProps = {
  */
 const Filter = props => {
   const { title, queryParam, input } = props;
-  const { type, items } = input;
+  const { type, defaultValue, items } = input;
   const { name } = queryParam;
 
   let commonProps = {
@@ -41,7 +41,8 @@ const Filter = props => {
       specialProps = {
         inputText: {
           name: name,
-          label: title
+          label: title,
+          defaultValue: defaultValue
         }
       };
       break;
