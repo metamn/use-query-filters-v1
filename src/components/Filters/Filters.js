@@ -39,14 +39,36 @@ const QueryParamsContext = React.createContext();
 const Filters = props => {
   const { filtersURL } = props;
 
-  let d = { data: {}, error: {} };
+  /**
+   * Fetching filters is async and can return different values: an error message, some initial data, and the real data.
+   *
+   * Therefore no other `useState` can be used after fetching filters. The error message will be something like `Cannot use hooks after conditional rendering`
+   *
+   * This means all states has to be set up before fetching filters. With default params, then updated via `useEffect` after the real filter data arrives
+   */
 
+  /**
+   * Sets up the data fetching
+   */
+  let data = { data: {}, error: {} };
+
+  /**
+   * Sets up the filters
+   *
+   * - They will be populated with the fetched data
+   */
   const [filters, setFilters] = useState([]);
 
   useEffect(() => {
-    setFilters(d.data);
-  }, [d]);
+    setFilters(data.data);
+  }, [data]);
 
+  /**
+   * Sets up a white list for `useQueryParams`
+   *
+   * - Only these URL query vars will be available for the app
+   * - This filters out malicious, undefined query vars
+   */
   const [queryParamsFromFilters, setQueryParamsFromFilters] = useState([]);
 
   useEffect(() => {
@@ -66,9 +88,14 @@ const Filters = props => {
     setQueryParams(queryParamsFromFilters);
   }, [queryParamsFromFilters]);
 
-  d = useSWR(filtersURL, fetcher);
-  if (d.error) return <div>Failed to load data from {filtersURL}</div>;
-  if (!d.data) return <div>Loading...</div>;
+  /**
+   * Fetches the data
+   *
+   * - Once done filters, queryParamsFromFilters, queryParams will all be updated
+   */
+  data = useSWR(filtersURL, fetcher);
+  if (data.error) return <div>Failed to load data from {filtersURL}</div>;
+  if (!data.data) return <div>Loading...</div>;
 
   return (
     <QueryParamsContext.Provider
