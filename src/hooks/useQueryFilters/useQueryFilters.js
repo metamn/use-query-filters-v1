@@ -44,6 +44,8 @@ const QueryParamDefaultPropTypes = {
 const getQueryParamsFromFilters = props => {
   const { filters } = props;
 
+  console.log("f:", filters);
+
   let results = {};
 
   return (
