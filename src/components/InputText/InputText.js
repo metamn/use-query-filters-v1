@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import PropTypes from "prop-types";
+
+import { QueryParamsContext } from "../Filters";
 
 /**
  * Defines the prop types
@@ -31,6 +33,11 @@ const defaultProps = {
  */
 const InputText = props => {
   const { name, label, defaultValue } = props;
+
+  /**
+   * Loads the global query params and the setter function
+   */
+  const { queryParams, setQueryParams } = useContext(QueryParamsContext);
 
   /**
    * Uses a state to handle the value change

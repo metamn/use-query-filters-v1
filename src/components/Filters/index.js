@@ -1,1 +1,6 @@
-export { default, FiltersPropTypes, FiltersDefaultProps } from "./Filters";
+export {
+  default,
+  FiltersPropTypes,
+  FiltersDefaultProps,
+  QueryParamsContext
+} from "./Filters";

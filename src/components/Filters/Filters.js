@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
 import useSWR from "swr";
-import { useQueryParams } from "use-query-params";
+import { useQueryParams, ArrayParam, StringParam } from "use-query-params";
 
 import { getQueryParamsFromFilters } from "../../hooks";
 import Filter, { FilterDefaultProps, FilterPropTypes } from "../Filter";
@@ -37,7 +37,7 @@ const QueryParamsContext = React.createContext();
  * Displays the component
  */
 const Filters = props => {
-  const { filtersURL } = props;
+  const { filtersURL, filters: defaultFilters } = props;
 
   /**
    * Fetching filters is async and can return different values: an error message, some initial data, and the real data.
@@ -57,7 +57,7 @@ const Filters = props => {
    *
    * - They will be populated with the fetched data
    */
-  const [filters, setFilters] = useState([]);
+  const [filters, setFilters] = useState(defaultFilters);
 
   useEffect(() => {
     setFilters(data.data);
@@ -69,7 +69,7 @@ const Filters = props => {
    * - Only these URL query vars will be available for the app
    * - This filters out malicious, undefined query vars
    */
-  const [queryParamsFromFilters, setQueryParamsFromFilters] = useState([]);
+  const [queryParamsFromFilters, setQueryParamsFromFilters] = useState({});
 
   useEffect(() => {
     setQueryParamsFromFilters(
@@ -91,11 +91,13 @@ const Filters = props => {
   /**
    * Fetches the data
    *
-   * - Once done filters, queryParamsFromFilters, queryParams will all be updated
+   * - Once done the filters, queryParamsFromFilters, queryParams will all be updated
    */
   data = useSWR(filtersURL, fetcher);
   if (data.error) return <div>Failed to load data from {filtersURL}</div>;
   if (!data.data) return <div>Loading...</div>;
+
+  console.log("qp:", queryParams);
 
   return (
     <QueryParamsContext.Provider
@@ -118,4 +120,8 @@ Filters.propTypes = propTypes;
 Filters.defaultProps = defaultProps;
 
 export default Filters;
-export { propTypes as FiltersPropTypes, defaultProps as FiltersDefaultProps };
+export {
+  propTypes as FiltersPropTypes,
+  defaultProps as FiltersDefaultProps,
+  QueryParamsContext
+};
