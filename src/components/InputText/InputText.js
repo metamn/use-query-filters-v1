@@ -35,22 +35,28 @@ const InputText = props => {
   /**
    * Uses a state to handle the value change
    */
-  const [value, setValue] = useState(defaultValue);
+  const [inputValue, setInputValue] = useState(defaultValue);
 
   /**
    * Handles the input value change
    */
   const handleChange = event => {
     const { target } = event;
+    const { value } = target;
 
-    setValue(target.value);
+    setInputValue(value);
   };
 
   return (
     <div className="InputText">
       <label htmlFor={name}>{label}</label>
 
-      <input type="text" name={name} value={value} onChange={handleChange} />
+      <input
+        type="text"
+        name={name}
+        value={inputValue}
+        onChange={handleChange}
+      />
     </div>
   );
 };

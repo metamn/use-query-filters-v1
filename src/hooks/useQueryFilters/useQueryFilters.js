@@ -48,13 +48,14 @@ const getQueryParamsFromFilters = props => {
 
   let results = [];
 
-  filters
-    .filter(item => item.queryParam)
-    .map(item => item.queryParam)
-    .map(item => {
-      const { name, type } = item;
-      results[name] = convertStringToQueryParamObject({ type: type });
-    });
+  filters &&
+    filters
+      .filter(item => item.queryParam)
+      .map(item => item.queryParam)
+      .map(item => {
+        const { name, type } = item;
+        results[name] = convertStringToQueryParamObject({ type: type });
+      });
 
   return results;
 };

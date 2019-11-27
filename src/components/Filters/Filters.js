@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
 import useSWR from "swr";
+import { useQueryParams } from "use-query-params";
 
 import { getQueryParamsFromFilters } from "../../hooks";
 import Filter, { FilterDefaultProps, FilterPropTypes } from "../Filter";
@@ -28,30 +29,61 @@ const defaultProps = {
 const fetcher = url => fetch(url).then(r => r.json());
 
 /**
+ * Sets up a context to make query params available down the component tree
+ */
+const QueryParamsContext = React.createContext();
+
+/**
  * Displays the component
  */
 const Filters = props => {
   const { filtersURL } = props;
 
-  const { data: filters, error } = useSWR(filtersURL, fetcher);
-  if (error) return <div>Failed to load data from {filtersURL}</div>;
-  if (!filters) return <div>Loading...</div>;
+  let d = { data: {}, error: {} };
+
+  const [filters, setFilters] = useState([]);
+
+  useEffect(() => {
+    setFilters(d.data);
+  }, [d]);
+
+  const [queryParamsFromFilters, setQueryParamsFromFilters] = useState([]);
+
+  useEffect(() => {
+    setQueryParamsFromFilters(
+      getQueryParamsFromFilters({
+        filters: filters
+      })
+    );
+  }, [filters]);
 
   /**
-   * Gets all available query params from filters
-   * - As a safety measure only these query params will be usable in the URL
+   * Sets up state to manage the query params
    */
-  const queryParamsFromFilters = getQueryParamsFromFilters({
-    filters: filters
-  });
+  const [queryParams, setQueryParams] = useQueryParams({});
+
+  useEffect(() => {
+    setQueryParams(queryParamsFromFilters);
+  }, [queryParamsFromFilters]);
+
+  d = useSWR(filtersURL, fetcher);
+  if (d.error) return <div>Failed to load data from {filtersURL}</div>;
+  if (!d.data) return <div>Loading...</div>;
 
   return (
-    <div className="Filters">
-      {filters &&
-        filters.map((filter, index) => {
-          return <Filter key={index} {...filter} />;
-        })}
-    </div>
+    <QueryParamsContext.Provider
+      value={{
+        queryParams: queryParams,
+        setQueryParams: setQueryParams
+      }}
+    >
+      <div className="Filters">
+        {filters &&
+          filters.map((filter, index) => {
+            return <Filter key={index} {...filter} />;
+          })}
+      </div>
+    </QueryParamsContext.Provider>
   );
 };
 

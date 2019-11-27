@@ -10,8 +10,7 @@ const propTypes = {
   items: PropTypes.arrayOf(
     PropTypes.shape({
       label: PropTypes.string,
-      queryValue: PropTypes.string,
-      isChecked: PropTypes.bool
+      queryValue: PropTypes.string
     })
   ),
   defaultChangeHandler: PropTypes.func
@@ -26,8 +25,7 @@ const defaultProps = {
   items: [
     {
       label: "Checkbox 1",
-      queryValue: "checkbox-1",
-      isChecked: false
+      queryValue: "checkbox-1"
     }
   ],
   defaultChangeHandler: () => {
