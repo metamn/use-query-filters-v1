@@ -1,6 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+import InputText, {
+  InputTextDefaultProps,
+  InputTextPropTypes
+} from "../InputText";
+import InputCheckbox, {
+  InputCheckboxDefaultProps,
+  InputCheckboxPropTypes
+} from "../InputCheckbox";
+
 /**
  * Defines the prop types
  */
@@ -32,51 +41,6 @@ const defaultProps = {
 };
 
 /**
- * Displays a text input
- *
- * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/text
- */
-const TextInput = props => {
-  const { name, label } = props;
-
-  return (
-    <div className="TextInput">
-      <label htmlFor={name}>{label}</label>
-
-      <input type="text" id="name" name={name} />
-    </div>
-  );
-};
-
-/**
- * Displays a checkbox input
- *
- * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/checkbox
- */
-const CheckboxInput = props => {
-  const { name, label, items } = props;
-
-  return (
-    <div className="CheckboxInput">
-      <div className="Label">{label}</div>
-      <div className="Items">
-        {items &&
-          items.map((item, index) => {
-            const { label: itemLabel } = item;
-
-            return (
-              <>
-                <input type="checkbox" id="scales" name={name} checked />
-                <label htmlFor={name}>{itemLabel}</label>
-              </>
-            );
-          })}
-      </div>
-    </div>
-  );
-};
-
-/**
  * Displays the component
  */
 const Input = props => {
@@ -86,11 +50,11 @@ const Input = props => {
 
   switch (type) {
     case "text":
-      input = TextInput(props);
+      input = <InputText {...props} />;
       break;
 
     case "checkbox":
-      input = CheckboxInput(props);
+      input = <InputCheckbox {...props} />;
       break;
 
     default:
