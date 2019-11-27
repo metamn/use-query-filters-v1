@@ -54,6 +54,7 @@ const getQueryParamsFromFilters = props => {
 /**
  * Returns a query param type object from a string
  *
+ * See the tests for details
  * @see https://github.com/pbeshai/use-query-params#param-types
  */
 const convertStringToQueryParamObject = props => {

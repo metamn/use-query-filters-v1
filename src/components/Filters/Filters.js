@@ -89,6 +89,8 @@ const Filters = props => {
    *
    * This one is tricky: the first initialization sets up the whitelist, all next modifications sets up the query params.
    *
+   * This is a strange, non-standard approach. Maybe the plugin has to be replaced.
+   *
    * Therefore useQueryParams must be initialized only once (no useEffect) with the final data
    *
    * @see https://github.com/pbeshai/use-query-params
