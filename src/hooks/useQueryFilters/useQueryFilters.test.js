@@ -1,4 +1,7 @@
-import { getQueryParamsFromFilters } from "./useQueryFilters";
+import {
+  getQueryParamsFromFilters,
+  convertStringToQueryParamObject
+} from "./useQueryFilters";
 import { StringParam, ArrayParam } from "use-query-params";
 
 const filters = [
@@ -31,4 +34,10 @@ test("Collects the query params from filters", () => {
     q: StringParam,
     location: ArrayParam
   });
+});
+
+test("Returns a query param type object from a string", () => {
+  expect(
+    convertStringToQueryParamObject({ type: "StringParam" })
+  ).toStrictEqual(StringParam);
 });

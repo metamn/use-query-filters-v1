@@ -31,22 +31,11 @@ const QueryParamDefaultPropTypes = {
 
 /**
  * Collects the query params from filters
- * 
- * Example: 
- * {
-      "name": "Search",
-      "queryParam": { "name": "q", "type": "StringParam" },
-      "input": { "type": "text" }
-	} 
-	=> {q: StringParam}
  *
+ * See the tests for details
  */
 const getQueryParamsFromFilters = props => {
   const { filters } = props;
-
-  console.log("f:", filters);
-
-  let results = {};
 
   return (
     filters &&
@@ -60,20 +49,10 @@ const getQueryParamsFromFilters = props => {
         return result;
       }, {})
   );
-  /*
-      .map(item => {
-        const { name, type } = item;
-        results[name] = convertStringToQueryParamObject({ type: type });
-      });
-      */
-
-  //return results;
 };
 
 /**
  * Returns a query param type object from a string
- *
- * Example: 'StringParam' => StringParam
  *
  * @see https://github.com/pbeshai/use-query-params#param-types
  */
@@ -117,6 +96,7 @@ const convertStringToQueryParamObject = props => {
 
 export {
   getQueryParamsFromFilters,
+  convertStringToQueryParamObject,
   QueryParamPropTypes,
   QueryParamDefaultPropTypes
 };
