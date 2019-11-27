@@ -46,8 +46,11 @@ const InputCheckbox = props => {
 
   /**
    * Uses a state to handle the checked status of items
+   *
+   * - The initial state has to be set up properly to avoid the warning: "A component is changing an uncontrolled input of type checkbox to be controlled"
    */
-  const [checkedItems, setCheckedItems] = useState({});
+  const initialState = Array(items.length).fill(false);
+  const [checkedItems, setCheckedItems] = useState(initialState);
 
   /**
    * Handles the checked value change
@@ -56,10 +59,7 @@ const InputCheckbox = props => {
     const { target } = event;
     const { checked, id } = target;
 
-    setCheckedItems({
-      ...checkedItems,
-      [id]: checked
-    });
+    setCheckedItems([...checkedItems, (checkedItems[id] = checked)]);
   };
 
   return (

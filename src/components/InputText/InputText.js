@@ -41,9 +41,9 @@ const InputText = props => {
    * Handles the input value change
    */
   const handleChange = event => {
-    const { value } = event.target.value;
+    const { target } = event;
 
-    setValue(value);
+    setValue(target.value);
   };
 
   return (
