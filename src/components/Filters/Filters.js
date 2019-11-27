@@ -79,6 +79,8 @@ const Filters = props => {
     );
   }, [filters]);
 
+  console.log("qpf:", queryParamsFromFilters);
+
   /**
    * Sets up state to manage the query params
    */
@@ -96,8 +98,6 @@ const Filters = props => {
   data = useSWR(filtersURL, fetcher);
   if (data.error) return <div>Failed to load data from {filtersURL}</div>;
   if (!data.data) return <div>Loading...</div>;
-
-  console.log("qp:", queryParams);
 
   return (
     <QueryParamsContext.Provider

@@ -1,8 +1,6 @@
-import React from "react";
 import PropTypes from "prop-types";
 
 import {
-  useQueryParams,
   StringParam,
   NumberParam,
   ObjectParam,
@@ -46,18 +44,28 @@ const QueryParamDefaultPropTypes = {
 const getQueryParamsFromFilters = props => {
   const { filters } = props;
 
-  let results = [];
+  let results = {};
 
-  filters &&
+  return (
+    filters &&
     filters
       .filter(item => item.queryParam)
       .map(item => item.queryParam)
+      .reduce((result, item) => {
+        const { name, type } = item;
+
+        result[name] = convertStringToQueryParamObject({ type: type });
+        return result;
+      }, {})
+  );
+  /*
       .map(item => {
         const { name, type } = item;
         results[name] = convertStringToQueryParamObject({ type: type });
       });
+      */
 
-  return results;
+  //return results;
 };
 
 /**
