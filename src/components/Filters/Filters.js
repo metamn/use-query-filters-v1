@@ -10,14 +10,16 @@ import Filter, { FilterDefaultProps, FilterPropTypes } from "../Filter";
  * Defines the prop types
  */
 const propTypes = {
-  filtersURL: PropTypes.string
+  filtersURL: PropTypes.string,
+  filters: PropTypes.arrayOf(PropTypes.shape(FilterPropTypes))
 };
 
 /**
  * Defines the default props
  */
 const defaultProps = {
-  filtersURL: "http://localhost:3001/filters"
+  filtersURL: "http://localhost:3001/filters",
+  filters: Array(1).fill(FilterDefaultProps)
 };
 
 /**

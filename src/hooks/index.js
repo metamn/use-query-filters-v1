@@ -1,1 +1,5 @@
-export { getQueryParamsFromFilters } from "./useQueryFilters";
+export {
+  getQueryParamsFromFilters,
+  QueryParamDefaultPropTypes,
+  QueryParamPropTypes
+} from "./useQueryFilters/useQueryFilters";

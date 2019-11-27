@@ -1,3 +1,6 @@
+import React from "react";
+import PropTypes from "prop-types";
+
 import {
   useQueryParams,
   StringParam,
@@ -11,6 +14,22 @@ import {
   DelimitedArrayParam,
   DelimitedNumericArrayParam
 } from "use-query-params";
+
+/**
+ * Defines the Query Param prop types
+ */
+const QueryParamPropTypes = {
+  name: PropTypes.String,
+  type: PropTypes.string
+};
+
+/**
+ * Defines the Query Param default props
+ */
+const QueryParamDefaultPropTypes = {
+  name: "q",
+  type: "StringParam"
+};
 
 /**
  * Collects the query params from filters
@@ -85,4 +104,8 @@ const convertStringToQueryParamObject = props => {
   return objects[strings.indexOf(type)];
 };
 
-export { getQueryParamsFromFilters };
+export {
+  getQueryParamsFromFilters,
+  QueryParamPropTypes,
+  QueryParamDefaultPropTypes
+};
