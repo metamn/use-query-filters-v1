@@ -2,7 +2,12 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
 import useSWR from "swr";
-import { useQueryParams, ArrayParam, StringParam } from "use-query-params";
+import {
+  useQueryParams,
+  ArrayParam,
+  StringParam,
+  NumberParam
+} from "use-query-params";
 
 import { getQueryParamsFromFilters } from "../../hooks";
 import Filter, { FilterDefaultProps, FilterPropTypes } from "../Filter";
@@ -37,7 +42,7 @@ const QueryParamsContext = React.createContext();
  * Displays the component
  */
 const Filters = props => {
-  const { filtersURL, filters: defaultFilters } = props;
+  const { filtersURL } = props;
 
   /**
    * Fetching filters is async and can return different values: an error message, some initial data, and the real data.
@@ -57,7 +62,7 @@ const Filters = props => {
    *
    * - They will be populated with the fetched data
    */
-  const [filters, setFilters] = useState(defaultFilters);
+  const [filters, setFilters] = useState([]);
 
   useEffect(() => {
     setFilters(data.data);
@@ -87,8 +92,15 @@ const Filters = props => {
   const [queryParams, setQueryParams] = useQueryParams({});
 
   useEffect(() => {
-    setQueryParams(queryParamsFromFilters);
+    if (queryParamsFromFilters !== undefined) {
+      setQueryParams(queryParamsFromFilters);
+    }
   }, [queryParamsFromFilters]);
+
+  const queryParamsContextValue = {
+    queryParams: queryParams,
+    setQueryParams: setQueryParams
+  };
 
   /**
    * Fetches the data
@@ -100,12 +112,10 @@ const Filters = props => {
   if (!data.data) return <div>Loading...</div>;
 
   return (
-    <QueryParamsContext.Provider
-      value={{
-        queryParams: queryParams,
-        setQueryParams: setQueryParams
-      }}
-    >
+    <QueryParamsContext.Provider value={queryParamsContextValue}>
+      <div className="Home">
+        <a href="http://localhost:3000/">Home</a>
+      </div>
       <div className="Filters">
         {filters &&
           filters.map((filter, index) => {
