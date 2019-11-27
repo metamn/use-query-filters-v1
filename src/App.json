@@ -1,22 +1,22 @@
 {
   "filters": [
     {
-      "name": "Search",
+      "title": "Search",
       "queryParam": { "name": "q", "type": "StringParam" },
       "input": { "type": "text" }
     },
     {
-      "name": "Location",
+      "title": "Location",
       "queryParam": { "name": "location", "type": "ArrayParam" },
       "input": {
         "type": "checkbox",
         "items": [
           {
-            "name": "Canada",
+            "label": "Canada",
             "queryValue": "ca"
           },
           {
-            "name": "Mexico",
+            "label": "Mexico",
             "queryValue": "mx"
           }
         ]
