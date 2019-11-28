@@ -32,7 +32,7 @@ const defaultProps = {
  * @see https://reactjs.org/docs/forms.html
  */
 const InputText = props => {
-  const { name, label, defaultValue } = props;
+  const { name, label } = props;
 
   /**
    * Loads the global query params and the setter function
@@ -40,9 +40,9 @@ const InputText = props => {
   const { queryParams, setQueryParams } = useContext(QueryParamsContext);
 
   /**
-   * Uses a state to handle the value change
+   * The value of the input box
    */
-  const [inputValue, setInputValue] = useState(defaultValue);
+  const inputValue = queryParams[name];
 
   /**
    * Handles the input value change
@@ -51,7 +51,10 @@ const InputText = props => {
     const { target } = event;
     const { value } = target;
 
-    setInputValue(value);
+    let queryParam = {};
+    queryParam[name] = value;
+
+    setQueryParams(queryParam);
   };
 
   return (

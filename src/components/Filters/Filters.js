@@ -32,12 +32,23 @@ const QueryParamsContext = React.createContext();
 const Filters = props => {
   const { filters } = props;
 
+  /**
+   * Loads all available param types.
+   *
+   * - This will act as a whitelist for URL params
+   */
   const queryParamsFromFilters = getQueryParamsFromFilters({
     filters: filters
   });
 
+  /**
+   * Sets up the query params
+   */
   const [queryParams, setQueryParams] = useQueryParams(queryParamsFromFilters);
 
+  /**
+   * Sets up the context for the query params
+   */
   const queryParamsContextValue = {
     queryParams: queryParams,
     setQueryParams: setQueryParams
@@ -45,16 +56,18 @@ const Filters = props => {
 
   return (
     <QueryParamsContext.Provider value={queryParamsContextValue}>
-      <div className="Home">
-        <a href="http://localhost:3000/">Home</a>
-      </div>
-
       <div className="Filters">
         {filters &&
           filters.map &&
           filters.map((filter, index) => {
             return <Filter key={index} {...filter} />;
           })}
+      </div>
+
+      <div className="Home">
+        <p>
+          <a href="http://localhost:3000/">Reset filters</a>
+        </p>
       </div>
     </QueryParamsContext.Provider>
   );

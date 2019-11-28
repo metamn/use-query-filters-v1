@@ -34,11 +34,11 @@ const Filter = props => {
     type: type
   };
 
-  let specialProps = {};
+  let specificProps = {};
 
   switch (type) {
     case "text":
-      specialProps = {
+      specificProps = {
         inputText: {
           name: name,
           label: title,
@@ -48,7 +48,7 @@ const Filter = props => {
       break;
 
     case "checkbox":
-      specialProps = {
+      specificProps = {
         inputCheckbox: {
           name: name,
           label: title,
@@ -63,7 +63,7 @@ const Filter = props => {
 
   return (
     <div className="Filter">
-      <Input {...commonProps} {...specialProps} />
+      <Input {...commonProps} {...specificProps} />
     </div>
   );
 };
