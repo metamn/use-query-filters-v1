@@ -91,7 +91,7 @@ const InputCheckbox = props => {
                   id={queryValue}
                   name={name}
                   checked={queryParam[queryValue]}
-                  onChange={event => handleChange(event)}
+                  onChange={handleChange}
                 />
                 <label htmlFor={name}>{itemLabel}</label>
               </div>
