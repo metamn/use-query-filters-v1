@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
-import { useQueryParams, StringParam, ArrayParam } from "use-query-params";
+import axios from "axios";
+import { useQueryParams } from "use-query-params";
 
-import { useData, getQueryParamsFromFilters } from "../../hooks";
+import { getQueryParamsFromFilters } from "../../hooks";
 import Filter, { FilterDefaultProps, FilterPropTypes } from "../Filter";
 
 /**
@@ -33,7 +34,18 @@ const QueryParamsContext = React.createContext();
 const Filters = props => {
   const { filtersURL, filters: defaultFilters } = props;
 
-  const filters = useData(filtersURL, defaultFilters);
+  const [filters, setFilters] = useState(defaultFilters);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await axios.get(filtersURL);
+
+      if (result.data) {
+        setFilters(result.data);
+      }
+    };
+    fetchData();
+  }, [filtersURL]);
 
   const queryParamsFromFilters = getQueryParamsFromFilters({
     filters: filters

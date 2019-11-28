@@ -4,4 +4,4 @@ export {
   QueryParamPropTypes
 } from "./useQueryFilters/useQueryFilters";
 
-export { useData } from "./useData/useData";
+export { useData } from "./useData/useData.js";
