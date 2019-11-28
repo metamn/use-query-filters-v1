@@ -31,7 +31,7 @@ const QueryParamsContext = React.createContext();
  * Displays the component
  */
 const Filters = props => {
-  const { filtersURL, filters: defaultFilters } = props;
+  const { filtersURL } = props;
 
   const filters = useData(filtersURL, defaultFilters);
 
@@ -47,7 +47,11 @@ const Filters = props => {
   };
 
   return (
-    <QueryParamsContext.Provider value={{}}>
+    <QueryParamsContext.Provider value={queryParamsContextValue}>
+      <div className="Home">
+        <a href="http://localhost:3000/">Home</a>
+      </div>
+
       <div className="Filters">
         {filters &&
           filters.map &&
