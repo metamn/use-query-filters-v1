@@ -28,10 +28,11 @@ const defaultProps = {
 const Filter = props => {
   const { title, queryParam, input } = props;
   const { type, defaultValue, items } = input;
-  const { name } = queryParam;
+  const { name, type: queryParamType } = queryParam;
 
   let commonProps = {
-    type: type
+    type: type, // TODO rename to inputTpe across the components
+    queryParamType: queryParamType
   };
 
   let specificProps = {};

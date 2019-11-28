@@ -15,6 +15,7 @@ import InputCheckbox, {
  */
 const propTypes = {
   type: PropTypes.oneOf(["text", "checkbox"]),
+  queryParamType: PropTypes.string,
   inputText: PropTypes.shape(InputTextPropTypes),
   inputCheckbox: PropTypes.shape(InputCheckboxPropTypes)
 };
@@ -24,6 +25,7 @@ const propTypes = {
  */
 const defaultProps = {
   type: "text",
+  queryParamType: "StringParam",
   inputText: InputTextDefaultProps,
   inputCheckbox: InputCheckboxDefaultProps
 };
@@ -32,17 +34,19 @@ const defaultProps = {
  * Displays the component
  */
 const Input = props => {
-  const { type, inputText, inputCheckbox } = props;
+  const { type, inputText, inputCheckbox, queryParamType } = props;
 
   let input = "";
 
   switch (type) {
     case "text":
-      input = <InputText {...inputText} />;
+      input = <InputText {...inputText} queryParamType={queryParamType} />;
       break;
 
     case "checkbox":
-      input = <InputCheckbox {...inputCheckbox} />;
+      input = (
+        <InputCheckbox {...inputCheckbox} queryParamType={queryParamType} />
+      );
       break;
 
     default:

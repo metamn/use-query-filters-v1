@@ -45,7 +45,7 @@ const InputText = props => {
   const queryParam = queryParams[name];
 
   /**
-   * Sets up the holder for new query param value
+   * Sets up the holder for the new query param value
    */
   let newQueryParam = {};
 

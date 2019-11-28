@@ -7,6 +7,7 @@ import { QueryParamsContext } from "../Filters";
  * Defines the prop types
  */
 const propTypes = {
+  queryParamType: PropTypes.string,
   name: PropTypes.string,
   label: PropTypes.string,
   items: PropTypes.arrayOf(
@@ -22,6 +23,7 @@ const propTypes = {
  * Defines the default props
  */
 const defaultProps = {
+  queryParamType: "DelimitedNumericArrayParam",
   name: "input-checkbox",
   label: "Input checkbox",
   items: [
@@ -42,7 +44,7 @@ const defaultProps = {
  * @see https://reactjs.org/docs/forms.html#handling-multiple-inputs
  */
 const InputCheckbox = props => {
-  const { name, label, items } = props;
+  const { queryParamType, name, label, items } = props;
 
   /**
    * Loads the global query params and the setter function
@@ -55,7 +57,7 @@ const InputCheckbox = props => {
   const queryParam = queryParams[name] || [];
 
   /**
-   * Sets up the holder for new query param value
+   * Sets up the holder for the new query param value
    */
   let newQueryParam = {};
 
@@ -67,11 +69,21 @@ const InputCheckbox = props => {
     const { checked, id } = target;
 
     /**
+     * Defines the type of the new query param value
+     *
+     * - on DelimitedNumericArrayParam it must be integer, otherwise string
+     */
+    const idTyped =
+      queryParamType === "DelimitedNumericArrayParam" ? parseInt(id) : id;
+
+    /**
      * Sets the new query param value
      */
     newQueryParam[name] = checked
-      ? [...queryParam, id]
+      ? [...queryParam, idTyped]
       : queryParam.filter(item => item != id);
+
+    console.log("nqp:", newQueryParam);
 
     setQueryParams(newQueryParam);
   };
@@ -90,7 +102,7 @@ const InputCheckbox = props => {
                   type="checkbox"
                   id={queryValue}
                   name={name}
-                  checked={queryParam[queryValue]}
+                  checked={queryParam.find(item => item === queryValue)}
                   onChange={handleChange}
                 />
                 <label htmlFor={name}>{itemLabel}</label>
