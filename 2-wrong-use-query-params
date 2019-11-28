@@ -1,0 +1,3 @@
+Refactored data fetching into `useData` didn't solved the `useQueryParams` problem.
+
+Now we have a `TypeError: prevDeps is undefined` error message.
