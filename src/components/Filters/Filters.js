@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
-import { useQueryParams } from "use-query-params";
+import { useQueryParams, StringParam, ArrayParam } from "use-query-params";
 
 import { useData, getQueryParamsFromFilters } from "../../hooks";
 import Filter, { FilterDefaultProps, FilterPropTypes } from "../Filter";
@@ -31,7 +31,7 @@ const QueryParamsContext = React.createContext();
  * Displays the component
  */
 const Filters = props => {
-  const { filtersURL } = props;
+  const { filtersURL, filters: defaultFilters } = props;
 
   const filters = useData(filtersURL, defaultFilters);
 
