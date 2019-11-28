@@ -48,6 +48,7 @@ const getQueryParamsFromFilters = props => {
 
   return (
     filters &&
+    filters.filter &&
     filters
       .filter(item => item.queryParam)
       .map(item => item.queryParam)

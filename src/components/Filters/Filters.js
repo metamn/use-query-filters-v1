@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
-import useSWR from "swr";
-import { useQueryParams, ArrayParam, StringParam } from "use-query-params";
+import { useQueryParams } from "use-query-params";
 
-import { getQueryParamsFromFilters } from "../../hooks";
+import { useData, getQueryParamsFromFilters } from "../../hooks";
 import Filter, { FilterDefaultProps, FilterPropTypes } from "../Filter";
 
 /**
@@ -24,11 +23,6 @@ const defaultProps = {
 };
 
 /**
- * Defines a fetcher for useSWR to comply with CORS coming from json-server
- */
-const fetcher = url => fetch(url).then(r => r.json());
-
-/**
  * Sets up a context to make query params available down the component tree
  */
 const QueryParamsContext = React.createContext();
@@ -39,75 +33,24 @@ const QueryParamsContext = React.createContext();
 const Filters = props => {
   const { filtersURL, filters: defaultFilters } = props;
 
-  /**
-   * Fetching filters is async and can return different values: an error message, some initial data, and the real data.
-   *
-   * Therefore no other `useState` can be used after fetching filters. The error message will be something like `Cannot use hooks after conditional rendering`
-   *
-   * This means all states has to be set up before fetching filters. With default params, then updated via `useEffect` after the real filter data arrives
-   */
+  const filters = useData(filtersURL, defaultFilters);
 
-  /**
-   * Sets up the data fetching
-   */
-  let data = { data: {}, error: {} };
+  const queryParamsFromFilters = getQueryParamsFromFilters({
+    filters: filters
+  });
 
-  /**
-   * Sets up the filters
-   *
-   * - They will be populated with the fetched data
-   */
-  const [filters, setFilters] = useState(defaultFilters);
+  const [queryParams, setQueryParams] = useQueryParams(queryParamsFromFilters);
 
-  useEffect(() => {
-    setFilters(data.data);
-  }, [data]);
-
-  /**
-   * Sets up a white list for `useQueryParams`
-   *
-   * - Only these URL query vars will be available for the app
-   * - This filters out malicious, undefined query vars
-   */
-  const [queryParamsFromFilters, setQueryParamsFromFilters] = useState({});
-
-  useEffect(() => {
-    setQueryParamsFromFilters(
-      getQueryParamsFromFilters({
-        filters: filters
-      })
-    );
-  }, [filters]);
-
-  console.log("qpf:", queryParamsFromFilters);
-
-  /**
-   * Sets up state to manage the query params
-   */
-  const [queryParams, setQueryParams] = useQueryParams({});
-
-  useEffect(() => {
-    setQueryParams(queryParamsFromFilters);
-  }, [queryParamsFromFilters]);
-
-  /**
-   * Fetches the data
-   *
-   * - Once done the filters, queryParamsFromFilters, queryParams will all be updated
-   */
-  data = useSWR(filtersURL, fetcher);
-  if (data.error) return <div>Failed to load data from {filtersURL}</div>;
-  if (!data.data) return <div>Loading...</div>;
+  const queryParamsContextValue = {
+    queryParams: queryParams,
+    setQueryParams: setQueryParams
+  };
 
   return (
-    <QueryParamsContext.Provider
-      value={{
-        queryParams: queryParams,
-        setQueryParams: setQueryParams
-      }}
-    >
+    <QueryParamsContext.Provider value={{}}>
       <div className="Filters">
         {filters &&
+          filters.map &&
           filters.map((filter, index) => {
             return <Filter key={index} {...filter} />;
           })}
