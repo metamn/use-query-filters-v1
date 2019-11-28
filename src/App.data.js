@@ -7,7 +7,7 @@ const data = {
     },
     {
       title: "Location",
-      queryParam: { name: "location", type: "ArrayParam" },
+      queryParam: { name: "location", type: "DelimitedArrayParam" },
       input: {
         type: "checkbox",
         items: [

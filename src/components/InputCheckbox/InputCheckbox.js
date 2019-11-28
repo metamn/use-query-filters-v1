@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import PropTypes from "prop-types";
+
+import { QueryParamsContext } from "../Filters";
 
 /**
  * Defines the prop types
@@ -43,12 +45,19 @@ const InputCheckbox = props => {
   const { name, label, items } = props;
 
   /**
-   * Uses a state to handle the checked status of items
-   *
-   * - The initial state has to be set up properly to avoid the warning: "A component is changing an uncontrolled input of type checkbox to be controlled"
+   * Loads the global query params and the setter function
    */
-  const initialState = Array(items.length).fill(false);
-  const [checkedItems, setCheckedItems] = useState(initialState);
+  const { queryParams, setQueryParams } = useContext(QueryParamsContext);
+
+  /**
+   * Loads the value of the query param
+   */
+  const queryParam = queryParams[name] || [];
+
+  /**
+   * Sets up the holder for new query param value
+   */
+  let newQueryParam = {};
 
   /**
    * Handles the checked value change
@@ -57,7 +66,14 @@ const InputCheckbox = props => {
     const { target } = event;
     const { checked, id } = target;
 
-    setCheckedItems([...checkedItems, (checkedItems[id] = checked)]);
+    /**
+     * Sets the new query param value
+     */
+    newQueryParam[name] = checked
+      ? [...queryParam, id]
+      : queryParam.filter(item => item != id);
+
+    setQueryParams(newQueryParam);
   };
 
   return (
@@ -74,7 +90,7 @@ const InputCheckbox = props => {
                   type="checkbox"
                   id={queryValue}
                   name={name}
-                  checked={checkedItems[queryValue]}
+                  checked={queryParam[queryValue]}
                   onChange={event => handleChange(event)}
                 />
                 <label htmlFor={name}>{itemLabel}</label>

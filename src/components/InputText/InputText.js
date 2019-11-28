@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import PropTypes from "prop-types";
 
 import { QueryParamsContext } from "../Filters";
@@ -40,9 +40,14 @@ const InputText = props => {
   const { queryParams, setQueryParams } = useContext(QueryParamsContext);
 
   /**
-   * The value of the input box
+   * Loads the value of the query param
    */
-  const inputValue = queryParams[name];
+  const queryParam = queryParams[name];
+
+  /**
+   * Sets up the holder for new query param value
+   */
+  let newQueryParam = {};
 
   /**
    * Handles the input value change
@@ -51,10 +56,12 @@ const InputText = props => {
     const { target } = event;
     const { value } = target;
 
-    let queryParam = {};
-    queryParam[name] = value;
+    /**
+     * Sets the new query param value
+     */
+    newQueryParam[name] = value;
 
-    setQueryParams(queryParam);
+    setQueryParams(newQueryParam);
   };
 
   return (
@@ -64,7 +71,7 @@ const InputText = props => {
       <input
         type="text"
         name={name}
-        value={inputValue}
+        value={queryParam}
         onChange={handleChange}
       />
     </div>
