@@ -87,7 +87,7 @@ const Filters = props => {
   const [queryParams, setQueryParams] = useQueryParams({});
 
   useEffect(() => {
-    setQueryParams(queryParamsFromFilters);
+    //setQueryParams(queryParamsFromFilters);
   }, [queryParamsFromFilters]);
 
   /**
