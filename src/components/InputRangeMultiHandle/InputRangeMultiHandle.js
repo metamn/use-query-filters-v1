@@ -68,7 +68,7 @@ const InputRangeMultiHandle = props => {
    * Sets the new query param value
    */
   useEffect(() => {
-    queryParam[name] = currentValue;
+    newQueryParam[name] = Object.values(currentValue);
   }, [currentValue]);
 
   return (
