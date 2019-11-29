@@ -13,7 +13,7 @@ const propTypes = {
   items: PropTypes.arrayOf(
     PropTypes.shape({
       label: PropTypes.string,
-      queryValue: PropTypes.string
+      queryValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
     })
   ),
   defaultChangeHandler: PropTypes.func
@@ -58,6 +58,8 @@ const InputCheckbox = props => {
 
   /**
    * Sets up the holder for the new query param value
+   *
+   * // TODO this will still give a warning "A component is changing an uncontrolled input of type checkbox to be controlled." - once, then will go away
    */
   let newQueryParam = {};
 
@@ -81,9 +83,7 @@ const InputCheckbox = props => {
      */
     newQueryParam[name] = checked
       ? [...queryParam, idTyped]
-      : queryParam.filter(item => item !== id);
-
-    console.log("nqp:", newQueryParam);
+      : queryParam.filter(item => item !== idTyped);
 
     setQueryParams(newQueryParam);
   };
