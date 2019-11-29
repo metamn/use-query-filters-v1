@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 
 import { useQueryParams } from "use-query-params";
 
 import { getQueryParamsFromFilters } from "../../hooks";
-import Filter, { FilterDefaultProps, FilterPropTypes } from "../Filter";
+import Filter, { FilterPropTypes } from "../Filter";
 import data from "../../App.data";
 
 /**
@@ -19,6 +19,7 @@ const propTypes = {
  */
 const defaultProps = {
   filters: data.filters
+  //filters: FilterDefaultProps
 };
 
 /**

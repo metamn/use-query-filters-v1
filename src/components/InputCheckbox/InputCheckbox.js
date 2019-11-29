@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import PropTypes from "prop-types";
 
 import { QueryParamsContext } from "../Filters";
@@ -81,7 +81,7 @@ const InputCheckbox = props => {
      */
     newQueryParam[name] = checked
       ? [...queryParam, idTyped]
-      : queryParam.filter(item => item != id);
+      : queryParam.filter(item => item !== id);
 
     console.log("nqp:", newQueryParam);
 
