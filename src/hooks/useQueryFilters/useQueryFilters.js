@@ -2,31 +2,46 @@ import PropTypes from "prop-types";
 
 import {
   StringParam,
-  NumberParam,
-  ObjectParam,
-  ArrayParam,
-  JsonParam,
-  DateParam,
-  BooleanParam,
-  NumericObjectParam,
   DelimitedArrayParam,
   DelimitedNumericArrayParam
 } from "use-query-params";
 
 /**
- * Defines the Query Param prop types
+ * Defines which param types are usable
+ *
+ * @see https://github.com/pbeshai/use-query-params#param-types
  */
-const QueryParamPropTypes = {
-  name: PropTypes.String,
-  type: PropTypes.string
-};
+const supportedParamTypes = [
+  StringParam,
+  DelimitedNumericArrayParam,
+  DelimitedArrayParam
+];
 
 /**
- * Defines the Query Param default props
+ * Defines the string correspondent to a param type
+ *
+ * - The filters will use these values to define the param types.
  */
-const QueryParamDefaultPropTypes = {
-  name: "q",
-  type: "StringParam"
+const supportedParamTypesAsString = [
+  "StringParam",
+  "DelimitedNumericArrayParam",
+  "DelimitedArrayParam"
+];
+
+/**
+ * Returns a query param type object from a string
+ */
+const convertStringToQueryParamObject = props => {
+  const { type } = props;
+
+  const index = supportedParamTypesAsString.indexOf(type);
+
+  if (index === -1) {
+    console.log("Invalid param type:", type);
+    return null;
+  }
+
+  return supportedParamTypes[index];
 };
 
 /**
@@ -53,47 +68,19 @@ const getQueryParamsFromFilters = props => {
 };
 
 /**
- * Returns a query param type object from a string
- *
- * See the tests for details
- * @see https://github.com/pbeshai/use-query-params#param-types
+ * Defines the Query Param prop types
  */
-const convertStringToQueryParamObject = props => {
-  const { type } = props;
+const QueryParamPropTypes = {
+  name: PropTypes.String,
+  type: PropTypes.string
+};
 
-  /**
-   * One of these objects will be returned ...
-   */
-  const objects = [
-    StringParam,
-    NumberParam,
-    ObjectParam,
-    ArrayParam,
-    JsonParam,
-    DateParam,
-    BooleanParam,
-    NumericObjectParam,
-    DelimitedArrayParam,
-    DelimitedNumericArrayParam
-  ];
-
-  /**
-   * ... when `type` matches one of these strings
-   */
-  const strings = [
-    "StringParam",
-    "NumberParam",
-    "ObjectParam",
-    "ArrayParam",
-    "JsonParam",
-    "DateParam",
-    "BooleanParam",
-    "NumericObjectParam",
-    "DelimitedArrayParam",
-    "DelimitedNumericArrayParam"
-  ];
-
-  return objects[strings.indexOf(type)];
+/**
+ * Defines the Query Param default props
+ */
+const QueryParamDefaultPropTypes = {
+  name: "q",
+  type: "StringParam"
 };
 
 export {
