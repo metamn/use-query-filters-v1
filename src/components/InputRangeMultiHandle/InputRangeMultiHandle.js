@@ -5,6 +5,7 @@ import InputRange from "react-input-range";
 import "react-input-range/lib/css/index.css";
 
 import { QueryParamsContext } from "../Filters";
+import { empty } from "rxjs";
 
 /**
  * Defines the prop types
@@ -60,9 +61,21 @@ const InputRangeMultiHandle = props => {
   let newQueryParam = {};
 
   /**
+   * Sets up the min/max initial values
+   */
+  let initialValue = value;
+
+  if (queryParam.length !== 0) {
+    initialValue = queryParam.reduce((accumulator, currentValue, index) => {
+      accumulator[Object.keys(value)[index]] = currentValue;
+      return accumulator;
+    }, {});
+  }
+
+  /**
    * Saves the current slider values into a state to update them instantly on user interaction
    */
-  const [currentValue, setCurrentValue] = useState(value);
+  const [currentValue, setCurrentValue] = useState(initialValue);
 
   /**
    * Sets the new query param value
