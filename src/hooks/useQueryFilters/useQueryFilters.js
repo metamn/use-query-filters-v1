@@ -20,8 +20,6 @@ const convertStringToQueryParamObject = props => {
 
 /**
  * Collects the query params from filters
- *
- * See the tests for details
  */
 const getQueryParamsFromFilters = props => {
   const { filters } = props;
