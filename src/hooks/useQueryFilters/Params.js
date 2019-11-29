@@ -2,6 +2,8 @@
  * Everything related to managing params from use-query-params
  */
 
+import PropTypes from "prop-types";
+
 import {
   StringParam,
   DelimitedArrayParam,
@@ -39,8 +41,26 @@ const isParamTypeAsStringSupported = props => {
   return SupportedParamTypesAsString.indexOf(paramTypeAsString);
 };
 
+/**
+ * Defines the query param prop types
+ */
+const QueryParamPropTypes = {
+  name: PropTypes.String,
+  type: PropTypes.string
+};
+
+/**
+ * Defines the query param default props
+ */
+const QueryParamDefaultPropTypes = {
+  name: "query-param-name",
+  type: "StringParam"
+};
+
 export {
   SupportedParamTypes,
   SupportedParamTypesAsString,
-  isParamTypeAsStringSupported
+  isParamTypeAsStringSupported,
+  QueryParamDefaultPropTypes,
+  QueryParamPropTypes
 };

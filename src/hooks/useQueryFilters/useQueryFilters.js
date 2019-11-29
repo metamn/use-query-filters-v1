@@ -1,5 +1,3 @@
-import PropTypes from "prop-types";
-
 import { isParamTypeAsStringSupported, SupportedParamTypes } from "./Params";
 
 /**
@@ -39,25 +37,4 @@ const getQueryParamsFromFilters = props => {
   );
 };
 
-/**
- * Defines the Query Param prop types
- */
-const QueryParamPropTypes = {
-  name: PropTypes.String,
-  type: PropTypes.string
-};
-
-/**
- * Defines the Query Param default props
- */
-const QueryParamDefaultPropTypes = {
-  name: "q",
-  type: "StringParam"
-};
-
-export {
-  getQueryParamsFromFilters,
-  convertStringToQueryParamObject,
-  QueryParamPropTypes,
-  QueryParamDefaultPropTypes
-};
+export { getQueryParamsFromFilters, convertStringToQueryParamObject };

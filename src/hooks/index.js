@@ -1,7 +1,7 @@
+export { getQueryParamsFromFilters } from "./useQueryFilters/useQueryFilters";
 export {
-  getQueryParamsFromFilters,
   QueryParamDefaultPropTypes,
   QueryParamPropTypes
-} from "./useQueryFilters/useQueryFilters";
+} from "./useQueryFilters/Params";
 
 export { useData } from "./useData/useData.js";
