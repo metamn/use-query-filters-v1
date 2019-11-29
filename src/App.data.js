@@ -6,6 +6,23 @@ const data = {
       input: { type: "text", defaultValue: "" }
     },
     {
+      title: "Loan status",
+      queryParam: { name: "status", type: "StringParam" },
+      input: {
+        type: "select",
+        items: [
+          {
+            label: "Fundraising",
+            queryValue: "fundraising"
+          },
+          {
+            label: "Funded",
+            queryValue: "funded"
+          }
+        ]
+      }
+    },
+    {
       title: "Location",
       queryParam: { name: "location", type: "DelimitedArrayParam" },
       input: {

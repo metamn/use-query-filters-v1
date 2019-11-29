@@ -53,13 +53,14 @@ const InputCheckbox = props => {
 
   /**
    * Loads the value of the query param
+   *
+   * // TODO this will still give a warning "A component is changing an uncontrolled input of type checkbox to be controlled." - once, then will go away
    */
   const queryParam = queryParams[name] || [];
 
   /**
    * Sets up the holder for the new query param value
    *
-   * // TODO this will still give a warning "A component is changing an uncontrolled input of type checkbox to be controlled." - once, then will go away
    */
   let newQueryParam = {};
 

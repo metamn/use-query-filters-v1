@@ -58,6 +58,16 @@ const Filter = props => {
       };
       break;
 
+    case "select":
+      specificProps = {
+        inputSelect: {
+          name: name,
+          label: title,
+          items: items
+        }
+      };
+      break;
+
     default:
       break;
   }
