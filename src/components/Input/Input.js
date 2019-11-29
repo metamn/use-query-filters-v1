@@ -13,16 +13,21 @@ import InputSelect, {
   InputSelectDefaultProps,
   InputSelectPropTypes
 } from "../InputSelect";
+import InputRadio, {
+  InputRadioPropTypes,
+  InputRadioDefaultProps
+} from "../InputRadio";
 
 /**
  * Defines the prop types
  */
 const propTypes = {
-  type: PropTypes.oneOf(["text", "checkbox"]),
+  type: PropTypes.oneOf(["text", "checkbox", "radio", "select"]),
   queryParamType: PropTypes.string,
   inputText: PropTypes.shape(InputTextPropTypes),
   inputCheckbox: PropTypes.shape(InputCheckboxPropTypes),
-  InputSelect: PropTypes.shape(InputSelectPropTypes)
+  inputSelect: PropTypes.shape(InputSelectPropTypes),
+  inputRadio: PropTypes.shape(InputRadioPropTypes)
 };
 
 /**
@@ -33,14 +38,22 @@ const defaultProps = {
   queryParamType: "StringParam",
   inputText: InputTextDefaultProps,
   inputCheckbox: InputCheckboxDefaultProps,
-  InputSelect: InputSelectDefaultProps
+  inputSelect: InputSelectDefaultProps,
+  inputRadio: InputRadioDefaultProps
 };
 
 /**
  * Displays the component
  */
 const Input = props => {
-  const { type, inputText, inputCheckbox, inputSelect, queryParamType } = props;
+  const {
+    type,
+    inputText,
+    inputCheckbox,
+    inputSelect,
+    inputRadio,
+    queryParamType
+  } = props;
 
   let input = "";
 
@@ -57,6 +70,10 @@ const Input = props => {
 
     case "select":
       input = <InputSelect {...inputSelect} queryParamType={queryParamType} />;
+      break;
+
+    case "radio":
+      input = <InputRadio {...inputRadio} queryParamType={queryParamType} />;
       break;
 
     default:

@@ -22,30 +22,30 @@ const propTypes = {
  * Defines the default props
  */
 const defaultProps = {
-  label: "Select",
-  name: "select",
+  label: "Radio",
+  name: "radio",
   items: [
     {
-      label: "Select 1",
-      queryValue: "select-1"
+      label: "Radio 1",
+      queryValue: "radio-1"
     },
     {
-      label: "Select 2",
-      queryValue: "select-2"
+      label: "Radio 2",
+      queryValue: "radio-2"
     }
   ],
   defaultChangeHandler: () => {
-    console.log("InputSelect handleChange");
+    console.log("InputRadio handleChange");
   }
 };
 
 /**
  * Displays the component
  *
- * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select
+ * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/radio
  */
-const InputSelect = props => {
-  const { label, name, items, defaultChangeHandler } = props;
+const InputRadio = props => {
+  const { label, name, items } = props;
 
   /**
    * Loads the global query params and the setter function
@@ -68,47 +68,49 @@ const InputSelect = props => {
    */
   const handleChange = event => {
     const { target } = event;
-    const { value } = target;
+    const { id } = target;
 
     /**
      * Sets the new query param value
      */
-    newQueryParam[name] = value;
+    newQueryParam[name] = id;
 
     setQueryParams(newQueryParam);
   };
 
   return (
-    <div className="InputSelect">
-      <label htmlFor={name}>{label}</label>
+    <div className="InputRadio">
+      <div className="Label">{label}</div>
 
-      <select
-        name={name}
-        value={queryParam}
-        multiple={false}
-        onChange={handleChange}
-      >
+      <div className="Items">
         {items &&
           items.map &&
           items.map((item, index) => {
-            const { label, queryValue } = item;
+            const { label: itemLabel, queryValue } = item;
 
             return (
-              <option key={index} value={queryValue}>
-                {label}
-              </option>
+              <div className="Radio" key={index}>
+                <input
+                  type="radio"
+                  id={queryValue}
+                  name={name}
+                  checked={queryParam === queryValue}
+                  onChange={handleChange}
+                />
+                <label htmlFor={name}>{itemLabel}</label>
+              </div>
             );
           })}
-      </select>
+      </div>
     </div>
   );
 };
 
-InputSelect.propTypes = propTypes;
-InputSelect.defaultProps = defaultProps;
+InputRadio.propTypes = propTypes;
+InputRadio.defaultProps = defaultProps;
 
-export default InputSelect;
+export default InputRadio;
 export {
-  propTypes as InputSelectPropTypes,
-  defaultProps as InputSelectDefaultProps
+  propTypes as InputRadioPropTypes,
+  defaultProps as InputRadioDefaultProps
 };

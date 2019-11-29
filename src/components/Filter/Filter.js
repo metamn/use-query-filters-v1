@@ -68,6 +68,16 @@ const Filter = props => {
       };
       break;
 
+    case "radio":
+      specificProps = {
+        inputRadio: {
+          name: name,
+          label: title,
+          items: items
+        }
+      };
+      break;
+
     default:
       break;
   }

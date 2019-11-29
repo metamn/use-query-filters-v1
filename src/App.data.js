@@ -6,6 +6,23 @@ const data = {
       input: { type: "text", defaultValue: "" }
     },
     {
+      title: "Gender",
+      queryParam: { name: "gender", type: "StringParam" },
+      input: {
+        type: "radio",
+        items: [
+          {
+            label: "Women",
+            queryValue: "female"
+          },
+          {
+            label: "Men",
+            queryValue: "male"
+          }
+        ]
+      }
+    },
+    {
       title: "Loan status",
       queryParam: { name: "status", type: "StringParam" },
       input: {
