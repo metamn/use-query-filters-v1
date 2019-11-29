@@ -1,32 +1,6 @@
 import PropTypes from "prop-types";
 
-import {
-  StringParam,
-  DelimitedArrayParam,
-  DelimitedNumericArrayParam
-} from "use-query-params";
-
-/**
- * Defines which param types are usable
- *
- * @see https://github.com/pbeshai/use-query-params#param-types
- */
-const supportedParamTypes = [
-  StringParam,
-  DelimitedNumericArrayParam,
-  DelimitedArrayParam
-];
-
-/**
- * Defines the string correspondent to a param type
- *
- * - The filters will use these values to define the param types.
- */
-const supportedParamTypesAsString = [
-  "StringParam",
-  "DelimitedNumericArrayParam",
-  "DelimitedArrayParam"
-];
+import { isParamTypeAsStringSupported, SupportedParamTypes } from "./Params";
 
 /**
  * Returns a query param type object from a string
@@ -34,14 +8,14 @@ const supportedParamTypesAsString = [
 const convertStringToQueryParamObject = props => {
   const { type } = props;
 
-  const index = supportedParamTypesAsString.indexOf(type);
+  const index = isParamTypeAsStringSupported({ paramTypeAsString: type });
 
   if (index === -1) {
     console.log("Invalid param type:", type);
     return null;
   }
 
-  return supportedParamTypes[index];
+  return SupportedParamTypes[index];
 };
 
 /**
