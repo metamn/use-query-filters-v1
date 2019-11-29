@@ -19,6 +19,7 @@ json-server src/App.json --watch --port=3001
 ## Built on
 
 - Create React App
+- React input range: https://github.com/davidchin/react-input-range
 - Use Query Params: https://github.com/pbeshai/use-query-params
 - JSON Server: https://github.com/typicode/json-server
 - Data fetching: https://swr.now.sh/

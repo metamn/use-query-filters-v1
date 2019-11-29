@@ -27,7 +27,7 @@ const defaultProps = {
  */
 const Filter = props => {
   const { title, queryParam, input } = props;
-  const { type, defaultValue, items } = input;
+  const { type, defaultValue, items, min, max, value } = input;
   const { name, type: queryParamType } = queryParam;
 
   let commonProps = {
@@ -74,6 +74,18 @@ const Filter = props => {
           name: name,
           label: title,
           items: items
+        }
+      };
+      break;
+
+    case "range-multi-handle":
+      specificProps = {
+        inputRangeMultiHandle: {
+          name: name,
+          label: title,
+          min: min,
+          max: max,
+          value: value
         }
       };
       break;

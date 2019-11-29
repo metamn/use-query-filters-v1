@@ -6,6 +6,16 @@ const data = {
       input: { type: "text", defaultValue: "" }
     },
     {
+      title: "Risk rating",
+      queryParam: { name: "risk", type: "DelimitedNumericArrayParam" },
+      input: {
+        type: "range-multi-handle",
+        min: 0,
+        max: 5,
+        value: { min: 1, max: 4 }
+      }
+    },
+    {
       title: "Gender",
       queryParam: { name: "gender", type: "StringParam" },
       input: {

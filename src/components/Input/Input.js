@@ -17,17 +17,28 @@ import InputRadio, {
   InputRadioPropTypes,
   InputRadioDefaultProps
 } from "../InputRadio";
+import InputRangeMultiHandle, {
+  InputRangeMultiHandleDefaultProps,
+  InputRangeMultiHandlePropTypes
+} from "../InputRangeMultiHandle";
 
 /**
  * Defines the prop types
  */
 const propTypes = {
-  type: PropTypes.oneOf(["text", "checkbox", "radio", "select"]),
+  type: PropTypes.oneOf([
+    "text",
+    "checkbox",
+    "radio",
+    "select",
+    "range-multi-handle"
+  ]),
   queryParamType: PropTypes.string,
   inputText: PropTypes.shape(InputTextPropTypes),
   inputCheckbox: PropTypes.shape(InputCheckboxPropTypes),
   inputSelect: PropTypes.shape(InputSelectPropTypes),
-  inputRadio: PropTypes.shape(InputRadioPropTypes)
+  inputRadio: PropTypes.shape(InputRadioPropTypes),
+  inputRangeMultiHandle: PropTypes.shape(InputRangeMultiHandlePropTypes)
 };
 
 /**
@@ -39,7 +50,8 @@ const defaultProps = {
   inputText: InputTextDefaultProps,
   inputCheckbox: InputCheckboxDefaultProps,
   inputSelect: InputSelectDefaultProps,
-  inputRadio: InputRadioDefaultProps
+  inputRadio: InputRadioDefaultProps,
+  inputRangeMultiHandle: InputRangeMultiHandleDefaultProps
 };
 
 /**
@@ -52,6 +64,7 @@ const Input = props => {
     inputCheckbox,
     inputSelect,
     inputRadio,
+    inputRangeMultiHandle,
     queryParamType
   } = props;
 
@@ -74,6 +87,15 @@ const Input = props => {
 
     case "radio":
       input = <InputRadio {...inputRadio} queryParamType={queryParamType} />;
+      break;
+
+    case "range-multi-handle":
+      input = (
+        <InputRangeMultiHandle
+          {...inputRangeMultiHandle}
+          queryParamType={queryParamType}
+        />
+      );
       break;
 
     default:
