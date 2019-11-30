@@ -1,22 +1,22 @@
 const filters1 = [
   {
-    title: "Search",
+    label: "Search",
     queryParam: { name: "q", type: "StringParam" },
-    input: { type: "text", defaultValue: "" }
+    input: { type: "text", value: "" }
   },
   {
-    title: "Location",
+    label: "Location",
     queryParam: { name: "location", type: "ArrayParam" },
     input: {
       type: "checkbox",
       items: [
         {
           label: "Canada",
-          queryValue: "ca"
+          value: "ca"
         },
         {
           label: "Mexico",
-          queryValue: "mx"
+          value: "mx"
         }
       ]
     }
@@ -25,12 +25,12 @@ const filters1 = [
 
 const filters2 = [
   {
-    title: "Search",
+    label: "Search",
     queryParam: { name: "q", type: "StringParam" },
-    input: { type: "text", defaultValue: "" }
+    input: { type: "text", value: "" }
   },
   {
-    title: "Risk rating",
+    label: "Risk rating",
     queryParam: { name: "risk", type: "DelimitedNumericArrayParam" },
     input: {
       type: "range-multi-handle",
