@@ -3,7 +3,7 @@ const data = {
     {
       title: "Search",
       queryParam: { name: "q", type: "StringParam" },
-      input: { type: "text", defaultValue: "" }
+      input: { type: "text", value: "" }
     },
     {
       title: "Risk rating",
