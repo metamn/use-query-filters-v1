@@ -1,20 +1,4 @@
-import { isParamTypeAsStringSupported, SupportedParamTypes } from "./Params";
-
-/**
- * Returns a query param type object from a string
- */
-const convertStringToQueryParamObject = props => {
-  const { type } = props;
-
-  const index = isParamTypeAsStringSupported({ paramTypeAsString: type });
-
-  if (index === -1) {
-    console.log("Invalid param type:", type);
-    return null;
-  }
-
-  return SupportedParamTypes[index];
-};
+import { convertStringToQueryParamObject } from "./Params";
 
 /**
  * Collects the query params from filters
@@ -37,4 +21,4 @@ const getQueryParamsFromFilters = props => {
   );
 };
 
-export { getQueryParamsFromFilters, convertStringToQueryParamObject };
+export { getQueryParamsFromFilters };

@@ -11,6 +11,22 @@ import {
 } from "use-query-params";
 
 /**
+ * Defines the query param prop types
+ */
+const QueryParamPropTypes = {
+  name: PropTypes.String,
+  type: PropTypes.string
+};
+
+/**
+ * Defines the query param default props
+ */
+const QueryParamDefaultPropTypes = {
+  name: "queryParamName",
+  type: "StringParam"
+};
+
+/**
  * Defines which param types are usable
  *
  * @see https://github.com/pbeshai/use-query-params#param-types
@@ -42,25 +58,26 @@ const isParamTypeAsStringSupported = props => {
 };
 
 /**
- * Defines the query param prop types
+ * Returns a query param type object from a string
  */
-const QueryParamPropTypes = {
-  name: PropTypes.String,
-  type: PropTypes.string
-};
+const convertStringToQueryParamObject = props => {
+  const { type } = props;
 
-/**
- * Defines the query param default props
- */
-const QueryParamDefaultPropTypes = {
-  name: "query-param-name",
-  type: "StringParam"
+  const index = isParamTypeAsStringSupported({ paramTypeAsString: type });
+
+  if (index === -1) {
+    console.log("Invalid param type:", type);
+    return null;
+  }
+
+  return SupportedParamTypes[index];
 };
 
 export {
   SupportedParamTypes,
   SupportedParamTypesAsString,
   isParamTypeAsStringSupported,
+  convertStringToQueryParamObject,
   QueryParamDefaultPropTypes,
   QueryParamPropTypes
 };

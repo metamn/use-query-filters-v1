@@ -20,9 +20,3 @@ test("Fails collecting query params from filters if a query param is not support
     location: null
   });
 });
-
-test("Returns a query param type object from a string", () => {
-  expect(
-    convertStringToQueryParamObject({ type: "StringParam" })
-  ).toStrictEqual(StringParam);
-});
