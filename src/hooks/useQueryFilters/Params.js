@@ -27,7 +27,7 @@ const QueryParamDefaultPropTypes = {
 };
 
 /**
- * Defines which param types are usable
+ * Defines which param types are usable / implemented from `use-query-params`
  *
  * @see https://github.com/pbeshai/use-query-params#param-types
  */

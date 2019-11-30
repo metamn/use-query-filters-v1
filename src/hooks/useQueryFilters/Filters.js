@@ -2,9 +2,12 @@
  * Everything related to managing the filters
  */
 
+import PropTypes from "prop-types";
+
 /**
  * Defines which filter types are supported.
- * Alseo defines which query param type is supported by a filter.
+ * - Also defines which query param type is supported by a filter.
+ * - Also defines how the query value should look like
  *
  * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form
  * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input
@@ -13,25 +16,47 @@
 const SupportedFilters = [
   {
     filter: "text",
-    paramTypes: ["StringParam"]
+    paramTypes: ["StringParam"],
+    paramValues: PropTypes.string
   },
   {
     filter: "checkbox",
-    paramTypes: ["DelimitedArrayParam", "DelimitedNumericArrayParam"]
+    paramTypes: ["DelimitedArrayParam", "DelimitedNumericArrayParam"],
+    paramValues: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
   },
   {
     filter: "select",
-    paramTypes: ["StringParam"]
+    paramTypes: ["StringParam"],
+    paramValues: PropTypes.string
   },
   {
     filter: "radio",
-    paramTypes: ["StringParam"]
+    paramTypes: ["StringParam"],
+    paramValues: PropTypes.string
   },
   {
     filter: "range-multi-handle",
-    paramTypes: ["DelimitedNumericArrayParam"]
+    paramTypes: ["DelimitedNumericArrayParam"],
+    paramValues: PropTypes.shape({
+      min: PropTypes.number,
+      max: PropTypes.number
+    })
   }
 ];
+
+/**
+ * Defines how query values should look like
+ *
+ * - It is manually collected from `SupportedFilters`
+ */
+const SupportedQueryValues = PropTypes.oneOfType([
+  PropTypes.string,
+  PropTypes.number,
+  PropTypes.shape({
+    min: PropTypes.number,
+    max: PropTypes.number
+  })
+]);
 
 /**
  * Checks if a filter is well defined.
@@ -93,4 +118,9 @@ const areFiltersWellDefined = props => {
   return wellDefined === undefined;
 };
 
-export { SupportedFilters, isFilterWellDefined, areFiltersWellDefined };
+export {
+  SupportedFilters,
+  isFilterWellDefined,
+  areFiltersWellDefined,
+  SupportedQueryValues
+};

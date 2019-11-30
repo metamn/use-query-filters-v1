@@ -1,7 +1,4 @@
-import {
-  getQueryParamsFromFilters,
-  convertStringToQueryParamObject
-} from "./useQueryFilters";
+import { getQueryParamsFromFilters } from "./useQueryFilters";
 
 import { StringParam, DelimitedNumericArrayParam } from "use-query-params";
 

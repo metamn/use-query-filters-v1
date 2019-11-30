@@ -5,7 +5,6 @@ import InputRange from "react-input-range";
 import "react-input-range/lib/css/index.css";
 
 import { QueryParamsContext } from "../Filters";
-import { empty } from "rxjs";
 
 /**
  * Defines the prop types
@@ -82,7 +81,7 @@ const InputRangeMultiHandle = props => {
    */
   useEffect(() => {
     newQueryParam[name] = Object.values(currentValue);
-  }, [currentValue]);
+  }, [currentValue, name, newQueryParam]);
 
   return (
     <div className="InputRangeMultiHandle">

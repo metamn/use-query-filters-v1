@@ -4,10 +4,9 @@ import PropTypes from "prop-types";
 import InputText from "../InputText";
 import { InputTextPropTypes, InputTextDefaultProps } from "../../hooks";
 
-import InputCheckbox, {
-  InputCheckboxDefaultProps,
-  InputCheckboxPropTypes
-} from "../InputCheckbox";
+import InputCheckbox from "../InputCheckbox";
+import { InputCheckboxPropTypes, InputCheckboxDefaultProps } from "../../hooks";
+
 import InputSelect, {
   InputSelectDefaultProps,
   InputSelectPropTypes

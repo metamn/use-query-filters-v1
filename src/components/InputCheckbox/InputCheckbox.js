@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
 import PropTypes from "prop-types";
 
+import { InputCheckboxPropTypes, InputCheckboxDefaultProps } from "../../hooks";
+
 import { QueryParamsContext } from "../Filters";
 
 /**
@@ -115,11 +117,7 @@ const InputCheckbox = props => {
   );
 };
 
-InputCheckbox.propTypes = propTypes;
-InputCheckbox.defaultProps = defaultProps;
+InputCheckbox.propTypes = InputCheckboxPropTypes;
+InputCheckbox.defaultProps = InputCheckboxDefaultProps;
 
 export default InputCheckbox;
-export {
-  propTypes as InputCheckboxPropTypes,
-  defaultProps as InputCheckboxDefaultProps
-};
