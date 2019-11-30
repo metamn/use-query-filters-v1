@@ -1,10 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import InputText, {
-  InputTextDefaultProps,
-  InputTextPropTypes
-} from "../InputText";
+import InputText from "../InputText";
+import { InputTextPropTypes, InputTextDefaultProps } from "../../hooks";
+
 import InputCheckbox, {
   InputCheckboxDefaultProps,
   InputCheckboxPropTypes
