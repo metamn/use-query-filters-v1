@@ -1,8 +1,18 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import { QueryParamDefaultPropTypes, QueryParamPropTypes } from "../../hooks";
-import Input, { InputDefaultProps, InputPropTypes } from "../Input";
+import {
+  QueryParamDefaultPropTypes,
+  QueryParamPropTypes,
+  InputPropTypes,
+  InputDefaultProps
+} from "../../hooks";
+
+import InputText from "../InputText";
+import InputCheckbox from "../InputCheckbox";
+import InputSelect from "../InputSelect";
+import InputRadio from "../InputRadio";
+import InputRangeMultiHandle from "../InputRangeMultiHandle";
 
 /**
  * Defines the prop types
@@ -26,79 +36,40 @@ const defaultProps = {
  * Displays the component
  */
 const Filter = props => {
-  const { title, queryParam, input } = props;
-  const { type, defaultValue, items, min, max, value } = input;
-  const { name, type: queryParamType } = queryParam;
+  const { title, input, queryParam } = props;
+  const { type } = input;
 
-  let commonProps = {
-    type: type, // TODO rename to inputTpe across the components
-    queryParamType: queryParamType
-  };
+  const params = { label: title, queryParam, ...input };
 
-  let specificProps = {};
+  let result = null;
 
   switch (type) {
     case "text":
-      specificProps = {
-        inputText: {
-          name: name,
-          label: title,
-          defaultValue: defaultValue
-        }
-      };
+      result = <InputText {...params} />;
       break;
 
     case "checkbox":
-      specificProps = {
-        inputCheckbox: {
-          name: name,
-          label: title,
-          items: items
-        }
-      };
+      result = <InputCheckbox {...params} />;
       break;
 
     case "select":
-      specificProps = {
-        inputSelect: {
-          name: name,
-          label: title,
-          items: items
-        }
-      };
+      result = <InputSelect {...params} />;
       break;
 
     case "radio":
-      specificProps = {
-        inputRadio: {
-          name: name,
-          label: title,
-          items: items
-        }
-      };
+      result = <InputRadio {...params} />;
       break;
 
     case "range-multi-handle":
-      specificProps = {
-        inputRangeMultiHandle: {
-          name: name,
-          label: title,
-          min: min,
-          max: max,
-          value: value
-        }
-      };
+      result = <InputRangeMultiHandle {...params} />;
       break;
 
     default:
+      console.log("Invalid input type:", type);
       break;
   }
 
-  return (
-    <div className="Filter">
-      <Input {...commonProps} {...specificProps} />
-    </div>
-  );
+  return <div className="Filter">{result}</div>;
 };
 
 Filter.propTypes = propTypes;

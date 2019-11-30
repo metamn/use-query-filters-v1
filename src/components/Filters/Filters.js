@@ -55,6 +55,8 @@ const Filters = props => {
     setQueryParams: setQueryParams
   };
 
+  console.log("qp:", queryParams);
+
   return (
     <QueryParamsContext.Provider value={queryParamsContextValue}>
       <div className="Filters">

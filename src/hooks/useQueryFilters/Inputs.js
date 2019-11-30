@@ -3,15 +3,17 @@
  */
 
 import PropTypes from "prop-types";
-import { SupportedFilters, SupportedQueryValues } from "./Filters";
+import { SupportedFilters } from "./Filters";
+import { QueryParamPropTypes, QueryParamDefaultPropTypes } from "./Params";
 
 /**
  * Defines the common props for all inputs
  */
 const CommonInputPropTypes = {
+  label: PropTypes.string,
   type: PropTypes.oneOf(SupportedFilters.map(item => item.filter)),
   name: PropTypes.string,
-  value: SupportedQueryValues,
+  queryParam: PropTypes.shape(QueryParamPropTypes),
   changeHandler: PropTypes.func
 };
 
@@ -19,9 +21,10 @@ const CommonInputPropTypes = {
  * Defines the default values for the common props
  */
 const CommonInputDefaultProps = {
+  label: "Filter",
   type: "text",
   name: "query",
-  value: "",
+  queryParam: QueryParamDefaultPropTypes,
   handleChange: () => {
     console.log("handleChange");
   }
@@ -145,14 +148,38 @@ const InputCheckboxDefaultProps = {
  * Defines the text input prop types
  */
 const InputTextPropTypes = {
-  ...CommonInputPropTypes
+  ...CommonInputPropTypes,
+  value: PropTypes.string
 };
 
 /**
  * Defines the default props for the text input
  */
 const InputTextDefaultProps = {
-  ...CommonInputDefaultProps
+  ...CommonInputDefaultProps,
+  value: ""
+};
+
+/**
+ * Collects all input types into a proptype
+ */
+const InputPropTypes = {
+  ...InputTextPropTypes,
+  ...InputCheckboxPropTypes,
+  ...InputSelectPropTypes,
+  ...InputRadioPropTypes,
+  ...InputRangeMultiHandlePropTypes
+};
+
+/**
+ * Defines default props for all input types
+ */
+const InputDefaultProps = {
+  ...InputTextDefaultProps,
+  ...InputCheckboxDefaultProps,
+  ...InputSelectDefaultProps,
+  ...InputRadioDefaultProps,
+  ...InputRangeMultiHandleDefaultProps
 };
 
 export {
@@ -165,5 +192,7 @@ export {
   InputSelectPropTypes,
   InputSelectDefaultProps,
   InputRangeMultiHandlePropTypes,
-  InputRangeMultiHandleDefaultProps
+  InputRangeMultiHandleDefaultProps,
+  InputPropTypes,
+  InputDefaultProps
 };

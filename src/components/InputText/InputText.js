@@ -11,7 +11,8 @@ import { QueryParamsContext } from "../Filters";
  * @see https://reactjs.org/docs/forms.html
  */
 const InputText = props => {
-  const { name, label, value } = props;
+  const { label, queryParam: qp, value } = props;
+  const { name } = qp;
 
   /**
    * Loads the global query params and the setter function
