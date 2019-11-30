@@ -1,43 +1,8 @@
 import React, { useContext } from "react";
 import PropTypes from "prop-types";
 
+import { InputSelectPropTypes, InputSelectDefaultProps } from "../../hooks";
 import { QueryParamsContext } from "../Filters";
-
-/**
- * Defines the prop types
- */
-const propTypes = {
-  label: PropTypes.string,
-  name: PropTypes.string,
-  items: PropTypes.arrayOf(
-    PropTypes.shape({
-      label: PropTypes.string,
-      queryValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
-    })
-  ),
-  defaultChangeHandler: PropTypes.func
-};
-
-/**
- * Defines the default props
- */
-const defaultProps = {
-  label: "Select",
-  name: "select",
-  items: [
-    {
-      label: "Select 1",
-      queryValue: "select-1"
-    },
-    {
-      label: "Select 2",
-      queryValue: "select-2"
-    }
-  ],
-  defaultChangeHandler: () => {
-    console.log("InputSelect handleChange");
-  }
-};
 
 /**
  * Displays the component
@@ -104,11 +69,7 @@ const InputSelect = props => {
   );
 };
 
-InputSelect.propTypes = propTypes;
-InputSelect.defaultProps = defaultProps;
+InputSelect.propTypes = InputSelectPropTypes;
+InputSelect.defaultProps = InputSelectDefaultProps;
 
 export default InputSelect;
-export {
-  propTypes as InputSelectPropTypes,
-  defaultProps as InputSelectDefaultProps
-};

@@ -7,10 +7,8 @@ import { InputTextPropTypes, InputTextDefaultProps } from "../../hooks";
 import InputCheckbox from "../InputCheckbox";
 import { InputCheckboxPropTypes, InputCheckboxDefaultProps } from "../../hooks";
 
-import InputSelect, {
-  InputSelectDefaultProps,
-  InputSelectPropTypes
-} from "../InputSelect";
+import InputSelect from "../InputSelect";
+import { InputSelectDefaultProps, InputSelectPropTypes } from "../../hooks";
 
 import InputRadio from "../InputRadio";
 import { InputRadioPropTypes, InputRadioDefaultProps } from "../../hooks";

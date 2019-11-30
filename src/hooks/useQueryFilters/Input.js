@@ -47,6 +47,32 @@ const InputWithItemsPropTypes = props => {
 };
 
 /**
+ * Defines the select input prop types
+ */
+const InputSelectPropTypes = {
+  ...CommonInputPropTypes,
+  ...InputWithItemsPropTypes({ inputType: "select" })
+};
+
+/**
+ * Defines the default props for the select input
+ */
+const InputSelectDefaultProps = {
+  ...CommonInputDefaultProps,
+  label: "Select",
+  items: [
+    {
+      label: "Select 1",
+      value: "select-1"
+    },
+    {
+      label: "Select 2",
+      value: "select-2"
+    }
+  ]
+};
+
+/**
  * Defines the radio input prop types
  */
 const InputRadioPropTypes = {
@@ -110,5 +136,7 @@ export {
   InputCheckboxPropTypes,
   InputCheckboxDefaultProps,
   InputRadioPropTypes,
-  InputRadioDefaultProps
+  InputRadioDefaultProps,
+  InputSelectPropTypes,
+  InputSelectDefaultProps
 };

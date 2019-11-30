@@ -40,11 +40,11 @@ const data = {
         items: [
           {
             label: "Fundraising",
-            queryValue: "fundraising"
+            value: "fundraising"
           },
           {
             label: "Funded",
-            queryValue: "funded"
+            value: "funded"
           }
         ]
       }
