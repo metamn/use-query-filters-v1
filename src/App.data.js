@@ -1,12 +1,12 @@
 const data = {
   filters: [
     {
-      title: "Search",
+      label: "Search",
       queryParam: { name: "q", type: "StringParam" },
       input: { type: "text", value: "" }
     },
     {
-      title: "Risk rating",
+      label: "Risk rating",
       queryParam: { name: "risk", type: "DelimitedNumericArrayParam" },
       input: {
         type: "range-multi-handle",
@@ -16,7 +16,7 @@ const data = {
       }
     },
     {
-      title: "Gender",
+      label: "Gender",
       queryParam: { name: "gender", type: "StringParam" },
       input: {
         type: "radio",
@@ -33,7 +33,7 @@ const data = {
       }
     },
     {
-      title: "Loan status",
+      label: "Loan status",
       queryParam: { name: "status", type: "StringParam" },
       input: {
         type: "select",
@@ -50,7 +50,7 @@ const data = {
       }
     },
     {
-      title: "Location",
+      label: "Location",
       queryParam: { name: "location", type: "DelimitedArrayParam" },
       input: {
         type: "checkbox",
@@ -75,7 +75,7 @@ const data = {
       }
     },
     {
-      title: "Sector",
+      label: "Sector",
       queryParam: { name: "sector", type: "DelimitedNumericArrayParam" },
       input: {
         type: "checkbox",

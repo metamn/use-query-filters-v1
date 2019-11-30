@@ -10,7 +10,8 @@ import { QueryParamsContext } from "../Filters";
  * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/radio
  */
 const InputRadio = props => {
-  const { label, name, items } = props;
+  const { label, queryParam, items } = props;
+  const { name } = queryParam;
 
   /**
    * Loads the global query params and the setter function
@@ -20,7 +21,7 @@ const InputRadio = props => {
   /**
    * Loads the value of the query param
    */
-  const queryParam = queryParams[name] || "";
+  const currentValue = queryParams[name] || "";
 
   /**
    * Sets up the holder for the new query param value
@@ -59,7 +60,7 @@ const InputRadio = props => {
                   type="radio"
                   id={value}
                   name={name}
-                  checked={queryParam === value}
+                  checked={currentValue === value}
                   onChange={handleChange}
                 />
                 <label htmlFor={name}>{itemLabel}</label>

@@ -18,7 +18,7 @@ import InputRangeMultiHandle from "../InputRangeMultiHandle";
  * Defines the prop types
  */
 const propTypes = {
-  title: PropTypes.string,
+  label: PropTypes.string,
   queryParam: PropTypes.shape(QueryParamPropTypes),
   input: PropTypes.shape(InputPropTypes)
 };
@@ -27,7 +27,7 @@ const propTypes = {
  * Defines the default props
  */
 const defaultProps = {
-  title: "Search",
+  label: "Search",
   queryParam: QueryParamDefaultPropTypes,
   input: InputDefaultProps
 };
@@ -36,10 +36,10 @@ const defaultProps = {
  * Displays the component
  */
 const Filter = props => {
-  const { title, input, queryParam } = props;
+  const { label, input, queryParam } = props;
   const { type } = input;
 
-  const params = { label: title, queryParam, ...input };
+  const params = { label, queryParam, ...input };
 
   let result = null;
 

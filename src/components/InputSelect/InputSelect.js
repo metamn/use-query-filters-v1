@@ -10,7 +10,8 @@ import { QueryParamsContext } from "../Filters";
  * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select
  */
 const InputSelect = props => {
-  const { label, name, items, defaultChangeHandler } = props;
+  const { label, queryParam, items } = props;
+  const { name } = queryParam;
 
   /**
    * Loads the global query params and the setter function
@@ -20,7 +21,7 @@ const InputSelect = props => {
   /**
    * Loads the value of the query param
    */
-  const queryParam = queryParams[name] || "";
+  const currentValue = queryParams[name] || "";
 
   /**
    * Sets up the holder for the new query param value
@@ -49,17 +50,17 @@ const InputSelect = props => {
 
       <select
         name={name}
-        value={queryParam}
+        value={currentValue}
         multiple={false}
         onChange={handleChange}
       >
         {items &&
           items.map &&
           items.map((item, index) => {
-            const { label, queryValue } = item;
+            const { label, value } = item;
 
             return (
-              <option key={index} value={queryValue}>
+              <option key={index} value={value}>
                 {label}
               </option>
             );

@@ -11,8 +11,8 @@ import { QueryParamsContext } from "../Filters";
  * @see https://reactjs.org/docs/forms.html
  */
 const InputText = props => {
-  const { label, queryParam: qp, value } = props;
-  const { name } = qp;
+  const { label, queryParam, value } = props;
+  const { name } = queryParam;
 
   /**
    * Loads the global query params and the setter function
@@ -22,7 +22,7 @@ const InputText = props => {
   /**
    * Loads the value of the query param
    */
-  const queryParam = queryParams[name] || value;
+  const currentValue = queryParams[name] || value;
 
   /**
    * Sets up the holder for the new query param value
@@ -51,7 +51,7 @@ const InputText = props => {
       <input
         type="text"
         name={name}
-        value={queryParam}
+        value={currentValue}
         onChange={handleChange}
       />
     </div>
