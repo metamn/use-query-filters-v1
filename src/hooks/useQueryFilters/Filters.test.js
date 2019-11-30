@@ -1,4 +1,8 @@
-import { isFilterWellDefined, SupportedFilters } from "./Filters";
+import {
+  isFilterWellDefined,
+  SupportedFilters,
+  areFiltersWellDefined
+} from "./Filters";
 
 test("Checks if a filter is well defined.", () => {
   const supported = SupportedFilters[0];
@@ -14,7 +18,7 @@ test("Checks if a filter is well defined.", () => {
     }
   };
 
-  expect(isFilterWellDefined(props)).toStrictEqual(true);
+  expect(isFilterWellDefined({ filter: props })).toStrictEqual(true);
 });
 
 test("Fails when the filter's param type is not well defined.", () => {
@@ -30,7 +34,7 @@ test("Fails when the filter's param type is not well defined.", () => {
     }
   };
 
-  expect(isFilterWellDefined(props)).toStrictEqual(false);
+  expect(isFilterWellDefined({ filter: props })).toStrictEqual(false);
 });
 
 test("Fails when the filter's type is not well defined.", () => {
@@ -47,5 +51,20 @@ test("Fails when the filter's type is not well defined.", () => {
     }
   };
 
-  expect(isFilterWellDefined(props)).toStrictEqual(false);
+  expect(isFilterWellDefined({ filter: props })).toStrictEqual(false);
+});
+
+test("Checks if all filters are well defined.", () => {
+  const supported = SupportedFilters;
+
+  expect(areFiltersWellDefined({ filters: supported })).toStrictEqual(true);
+});
+
+test("Fails if one of the filters is not well defined.", () => {
+  const notSupported = [
+    ...SupportedFilters,
+    { filter: "random", paramTypes: ["StringParam"] }
+  ];
+
+  expect(areFiltersWellDefined({ filters: notSupported })).toStrictEqual(false);
 });
