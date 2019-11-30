@@ -47,6 +47,31 @@ const InputWithItemsPropTypes = props => {
 };
 
 /**
+ * Defines the range multi handle input prop types
+ */
+const InputRangeMultiHandlePropTypes = {
+  ...CommonInputPropTypes,
+  min: PropTypes.number,
+  max: PropTypes.number,
+  value: SupportedFilters.filter(
+    item => item.filter === "range-multi-handle"
+  ).map(item => item.paramValues)
+};
+
+/**
+ * Defines the default props for the range multi handle input
+ */
+const InputRangeMultiHandleDefaultProps = {
+  ...CommonInputDefaultProps,
+  min: 0,
+  max: 5,
+  value: PropTypes.shape({
+    min: 1,
+    max: 4
+  })
+};
+
+/**
  * Defines the select input prop types
  */
 const InputSelectPropTypes = {
@@ -138,5 +163,7 @@ export {
   InputRadioPropTypes,
   InputRadioDefaultProps,
   InputSelectPropTypes,
-  InputSelectDefaultProps
+  InputSelectDefaultProps,
+  InputRangeMultiHandlePropTypes,
+  InputRangeMultiHandleDefaultProps
 };

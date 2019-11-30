@@ -13,10 +13,11 @@ import { InputSelectDefaultProps, InputSelectPropTypes } from "../../hooks";
 import InputRadio from "../InputRadio";
 import { InputRadioPropTypes, InputRadioDefaultProps } from "../../hooks";
 
-import InputRangeMultiHandle, {
+import InputRangeMultiHandle from "../InputRangeMultiHandle";
+import {
   InputRangeMultiHandleDefaultProps,
   InputRangeMultiHandlePropTypes
-} from "../InputRangeMultiHandle";
+} from "../../hooks";
 
 /**
  * Defines the prop types

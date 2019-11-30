@@ -1,38 +1,13 @@
 import React, { useState, useEffect, useContext } from "react";
-import PropTypes from "prop-types";
 
 import InputRange from "react-input-range";
 import "react-input-range/lib/css/index.css";
 
+import {
+  InputRangeMultiHandlePropTypes,
+  InputRangeMultiHandleDefaultProps
+} from "../../hooks";
 import { QueryParamsContext } from "../Filters";
-
-/**
- * Defines the prop types
- */
-const propTypes = {
-  label: PropTypes.string,
-  name: PropTypes.string,
-  min: PropTypes.number,
-  max: PropTypes.number,
-  value: PropTypes.shape({
-    min: PropTypes.number,
-    max: PropTypes.number
-  })
-};
-
-/**
- * Defines the default props
- */
-const defaultProps = {
-  label: "Range with multiple handles",
-  name: "range-multi-handle",
-  min: 0,
-  max: 5,
-  value: PropTypes.shape({
-    min: 1,
-    max: 4
-  })
-};
 
 /**
  * Displays the component
@@ -98,11 +73,7 @@ const InputRangeMultiHandle = props => {
   );
 };
 
-InputRangeMultiHandle.propTypes = propTypes;
-InputRangeMultiHandle.defaultProps = defaultProps;
+InputRangeMultiHandle.propTypes = InputRangeMultiHandlePropTypes;
+InputRangeMultiHandle.defaultProps = InputRangeMultiHandleDefaultProps;
 
 export default InputRangeMultiHandle;
-export {
-  propTypes as InputRangeMultiHandlePropTypes,
-  defaultProps as InputRangeMultiHandleDefaultProps
-};
