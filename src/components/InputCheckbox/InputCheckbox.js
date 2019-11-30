@@ -11,7 +11,8 @@ import { QueryParamsContext } from "../Filters";
  * @see https://reactjs.org/docs/forms.html#handling-multiple-inputs
  */
 const InputCheckbox = props => {
-  const { queryParamType, name, label, items } = props;
+  const { label, queryParam, items } = props;
+  const { name, type: queryParamType } = queryParam;
 
   /**
    * Loads the global query params and the setter function
@@ -23,7 +24,7 @@ const InputCheckbox = props => {
    *
    * // TODO this will still give a warning "A component is changing an uncontrolled input of type checkbox to be controlled." - once, then will go away
    */
-  const queryParam = queryParams[name] || [];
+  const currentValue = queryParams[name] || [];
 
   /**
    * Sets up the holder for the new query param value
@@ -50,8 +51,8 @@ const InputCheckbox = props => {
      * Sets the new query param value
      */
     newQueryParam[name] = checked
-      ? [...queryParam, idTyped]
-      : queryParam.filter(item => item !== idTyped);
+      ? [...currentValue, idTyped]
+      : currentValue.filter(item => item !== idTyped);
 
     setQueryParams(newQueryParam);
   };
@@ -70,7 +71,7 @@ const InputCheckbox = props => {
                   type="checkbox"
                   id={value}
                   name={name}
-                  checked={queryParam.find(item => item === value)}
+                  checked={currentValue.find(item => item === value)}
                   onChange={handleChange}
                 />
                 <label htmlFor={name}>{itemLabel}</label>
