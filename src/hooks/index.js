@@ -6,6 +6,6 @@ export {
 
 export { isFilterWellDefined } from "./useQueryFilters/Filters";
 
-export * from "./useQueryFilters/Input";
+export * from "./useQueryFilters/Inputs";
 
 export { useData } from "./useData/useData.js";
