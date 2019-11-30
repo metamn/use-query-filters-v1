@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 import { useQueryParams } from "use-query-params";
 
-import { getQueryParamsFromFilters } from "../../hooks";
+import { getQueryParamsFromFilters, isFilterWellDefined } from "../../hooks";
 import Filter, { FilterPropTypes } from "../Filter";
 import data from "../../App.data";
 
@@ -61,7 +61,12 @@ const Filters = props => {
         {filters &&
           filters.map &&
           filters.map((filter, index) => {
-            return <Filter key={index} {...filter} />;
+            /**
+             * Only well defined filters will be displayed
+             */
+            return isFilterWellDefined({ filter: filter }) ? (
+              <Filter key={index} {...filter} />
+            ) : null;
           })}
       </div>
 
