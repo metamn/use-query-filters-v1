@@ -28,17 +28,66 @@ const CommonInputDefaultProps = {
 };
 
 /**
+ * Defines the common props for the inputs with items
+ */
+const InputWithItemsPropTypes = props => {
+  const { inputType } = props;
+
+  return {
+    label: PropTypes.string,
+    items: PropTypes.arrayOf(
+      PropTypes.shape({
+        label: PropTypes.string,
+        value: SupportedFilters.filter(item => item.filter === inputType).map(
+          item => item.paramValues
+        )
+      })
+    )
+  };
+};
+
+/**
+ * Defines the radio input prop types
+ */
+const InputRadioPropTypes = {
+  ...CommonInputPropTypes,
+  ...InputWithItemsPropTypes({ inputType: "radio" })
+};
+
+/**
+ * Defines the default props for the radio input
+ */
+const InputRadioDefaultProps = {
+  ...CommonInputDefaultProps,
+  label: "Radio",
+  items: [
+    {
+      label: "Radio 1",
+      value: "radio-1"
+    }
+  ]
+};
+
+/**
  * Defines the checkbox input prop types
  */
 const InputCheckboxPropTypes = {
-  ...CommonInputPropTypes
+  ...CommonInputPropTypes,
+  ...InputWithItemsPropTypes({ inputType: "checkbox" })
 };
 
 /**
  * Defines the default props for the checkbox input
  */
 const InputCheckboxDefaultProps = {
-  ...CommonInputDefaultProps
+  ...CommonInputDefaultProps,
+  label: "Checkbox",
+  items: [
+    {
+      label: "Checkbox 1",
+      value: "checkbox-1"
+    }
+  ]
 };
 
 /**
@@ -59,5 +108,7 @@ export {
   InputTextPropTypes,
   InputTextDefaultProps,
   InputCheckboxPropTypes,
-  InputCheckboxDefaultProps
+  InputCheckboxDefaultProps,
+  InputRadioPropTypes,
+  InputRadioDefaultProps
 };

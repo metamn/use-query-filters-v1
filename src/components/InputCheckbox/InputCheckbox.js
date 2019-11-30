@@ -1,43 +1,8 @@
 import React, { useContext } from "react";
-import PropTypes from "prop-types";
 
 import { InputCheckboxPropTypes, InputCheckboxDefaultProps } from "../../hooks";
 
 import { QueryParamsContext } from "../Filters";
-
-/**
- * Defines the prop types
- */
-const propTypes = {
-  queryParamType: PropTypes.string,
-  name: PropTypes.string,
-  label: PropTypes.string,
-  items: PropTypes.arrayOf(
-    PropTypes.shape({
-      label: PropTypes.string,
-      queryValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
-    })
-  ),
-  defaultChangeHandler: PropTypes.func
-};
-
-/**
- * Defines the default props
- */
-const defaultProps = {
-  queryParamType: "DelimitedNumericArrayParam",
-  name: "input-checkbox",
-  label: "Input checkbox",
-  items: [
-    {
-      label: "Checkbox 1",
-      queryValue: "checkbox-1"
-    }
-  ],
-  defaultChangeHandler: () => {
-    console.log("InputCheckbox handleChange");
-  }
-};
 
 /**
  * Displays the component
@@ -97,15 +62,15 @@ const InputCheckbox = props => {
       <div className="Items">
         {items &&
           items.map((item, index) => {
-            const { label: itemLabel, queryValue } = item;
+            const { label: itemLabel, value } = item;
 
             return (
               <div className="Checkbox" key={index}>
                 <input
                   type="checkbox"
-                  id={queryValue}
+                  id={value}
                   name={name}
-                  checked={queryParam.find(item => item === queryValue)}
+                  checked={queryParam.find(item => item === value)}
                   onChange={handleChange}
                 />
                 <label htmlFor={name}>{itemLabel}</label>

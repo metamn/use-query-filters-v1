@@ -1,5 +1,1 @@
-export {
-  default,
-  InputRadioPropTypes,
-  InputRadioDefaultProps
-} from "./InputRadio";
+export { default } from "./InputRadio";

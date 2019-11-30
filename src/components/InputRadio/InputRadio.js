@@ -1,43 +1,8 @@
 import React, { useContext } from "react";
 import PropTypes from "prop-types";
 
+import { InputRadioPropTypes, InputRadioDefaultProps } from "../../hooks";
 import { QueryParamsContext } from "../Filters";
-
-/**
- * Defines the prop types
- */
-const propTypes = {
-  label: PropTypes.string,
-  name: PropTypes.string,
-  items: PropTypes.arrayOf(
-    PropTypes.shape({
-      label: PropTypes.string,
-      queryValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
-    })
-  ),
-  defaultChangeHandler: PropTypes.func
-};
-
-/**
- * Defines the default props
- */
-const defaultProps = {
-  label: "Radio",
-  name: "radio",
-  items: [
-    {
-      label: "Radio 1",
-      queryValue: "radio-1"
-    },
-    {
-      label: "Radio 2",
-      queryValue: "radio-2"
-    }
-  ],
-  defaultChangeHandler: () => {
-    console.log("InputRadio handleChange");
-  }
-};
 
 /**
  * Displays the component
@@ -86,15 +51,15 @@ const InputRadio = props => {
         {items &&
           items.map &&
           items.map((item, index) => {
-            const { label: itemLabel, queryValue } = item;
+            const { label: itemLabel, value } = item;
 
             return (
               <div className="Radio" key={index}>
                 <input
                   type="radio"
-                  id={queryValue}
+                  id={value}
                   name={name}
-                  checked={queryParam === queryValue}
+                  checked={queryParam === value}
                   onChange={handleChange}
                 />
                 <label htmlFor={name}>{itemLabel}</label>
@@ -106,11 +71,7 @@ const InputRadio = props => {
   );
 };
 
-InputRadio.propTypes = propTypes;
-InputRadio.defaultProps = defaultProps;
+InputRadio.propTypes = InputRadioPropTypes;
+InputRadio.defaultProps = InputRadioDefaultProps;
 
 export default InputRadio;
-export {
-  propTypes as InputRadioPropTypes,
-  defaultProps as InputRadioDefaultProps
-};

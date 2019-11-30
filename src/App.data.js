@@ -23,11 +23,11 @@ const data = {
         items: [
           {
             label: "Women",
-            queryValue: "female"
+            value: "female"
           },
           {
             label: "Men",
-            queryValue: "male"
+            value: "male"
           }
         ]
       }
@@ -57,19 +57,19 @@ const data = {
         items: [
           {
             label: "Canada",
-            queryValue: "ca"
+            value: "ca"
           },
           {
             label: "Mexico",
-            queryValue: "mx"
+            value: "mx"
           },
           {
             label: "UK",
-            queryValue: "uk"
+            value: "uk"
           },
           {
             label: "France",
-            queryValue: "fr"
+            value: "fr"
           }
         ]
       }
@@ -82,15 +82,15 @@ const data = {
         items: [
           {
             label: "Agriculture",
-            queryValue: 1
+            value: 1
           },
           {
             label: "Economy",
-            queryValue: 2
+            value: 2
           },
           {
             label: "IT",
-            queryValue: 300
+            value: 300
           }
         ]
       }
