@@ -17,7 +17,8 @@ import { QueryParamsContext } from "../Filters";
  * @see https://github.com/davidchin/react-input-range
  */
 const InputRangeMultiHandle = props => {
-  const { label, name, min, max, value } = props;
+  const { label, queryParam: qp, min, max, value } = props;
+  const { name } = qp;
 
   /**
    * Loads the global query params and the setter function
