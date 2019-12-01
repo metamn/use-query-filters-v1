@@ -5,21 +5,23 @@ import { useQueryParams } from "use-query-params";
 
 import { getQueryParamsFromFilters, isFilterWellDefined } from "../../hooks";
 import Filter, { FilterPropTypes } from "../Filter";
+import FilterGroups, { FilterGroupsPropTypes } from "../FilterGroups";
 import data from "../../App.data";
 
 /**
  * Defines the prop types
  */
 const propTypes = {
-  filters: PropTypes.arrayOf(PropTypes.shape(FilterPropTypes))
+  filters: PropTypes.arrayOf(PropTypes.shape(FilterPropTypes)),
+  ...FilterGroupsPropTypes
 };
 
 /**
  * Defines the default props
  */
 const defaultProps = {
-  filters: data.filters
-  //filters: FilterDefaultProps
+  filters: data.filters,
+  filterGroups: data.groups
 };
 
 /**
@@ -28,10 +30,40 @@ const defaultProps = {
 const QueryParamsContext = React.createContext();
 
 /**
+ * Displays a set of filters
+ */
+const displayFilters = props => {
+  const { filters } = props;
+
+  return (
+    <div className="Filters">
+      {filters &&
+        filters.map &&
+        filters.map((filter, index) => {
+          /**
+           * Only well defined filters will be displayed
+           */
+          return isFilterWellDefined({ filter: filter }) ? (
+            <Filter key={index} {...filter} />
+          ) : null;
+        })}
+    </div>
+  );
+};
+
+/**
+ * Finds a filter by its label
+ */
+const findFilterByLabel = props => {
+  const { label, filters } = props;
+  return filters.find(item => item.label === label);
+};
+
+/**
  * Displays the component
  */
 const Filters = props => {
-  const { filters } = props;
+  const { filters, filterGroups } = props;
 
   /**
    * Loads all available param types.
@@ -55,23 +87,9 @@ const Filters = props => {
     setQueryParams: setQueryParams
   };
 
-  console.log("qp:", queryParams);
-
   return (
     <QueryParamsContext.Provider value={queryParamsContextValue}>
-      <div className="Filters">
-        {filters &&
-          filters.map &&
-          filters.map((filter, index) => {
-            /**
-             * Only well defined filters will be displayed
-             */
-            return isFilterWellDefined({ filter: filter }) ? (
-              <Filter key={index} {...filter} />
-            ) : null;
-          })}
-      </div>
-
+      {filterGroups ? <FilterGroups {...props} /> : displayFilters(props)}
       <div className="Home">
         <p>
           <a href="http://localhost:3000/">Reset filters</a>
@@ -88,5 +106,7 @@ export default Filters;
 export {
   propTypes as FiltersPropTypes,
   defaultProps as FiltersDefaultProps,
-  QueryParamsContext
+  QueryParamsContext,
+  displayFilters,
+  findFilterByLabel
 };

@@ -2,5 +2,7 @@ export {
   default,
   FiltersPropTypes,
   FiltersDefaultProps,
-  QueryParamsContext
+  QueryParamsContext,
+  displayFilters,
+  findFilterByLabel
 } from "./Filters";
