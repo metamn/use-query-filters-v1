@@ -46,9 +46,15 @@ const FilterGroup = props => {
     return displayFilters({ filters: [f] });
   }
 
+  const items = filters.map((filter, index) => {
+    const { label } = filter;
+    return findFilterByLabel({ label: label, filters: allFilters });
+  });
+
   return (
     <div className="FilterGroup">
       <div className="Label">{label}</div>
+      <div className="Items">{displayFilters({ filters: items })}</div>
     </div>
   );
 };
