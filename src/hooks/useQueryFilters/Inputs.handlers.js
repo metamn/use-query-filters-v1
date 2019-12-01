@@ -3,47 +3,38 @@
  */
 
 /**
- * Handles events associated to inputs
+ * Handles events associated to a common set of inputs (text, radio, select ...)
  */
-const handleChange = props => {
-  const { inputType, name, event, set } = props;
+const commonHandleChange = props => {
+  const { name, event, set } = props;
+  const { target } = event;
+  const { value } = target;
 
   let newQueryParam = {};
+  newQueryParam[name] = value;
 
-  switch (inputType) {
-    case "select":
-    case "radio":
-    case "text":
-      const { target } = event;
-      const { value } = target;
-
-      newQueryParam[name] = value;
-
-      set(newQueryParam);
-      break;
-    default:
-  }
+  set(newQueryParam);
 };
 
 /**
  * Handles events associated to a text input
  */
 const inputSelectHandleChange = props => {
-  return handleChange({ ...props, inputType: "select" });
+  return commonHandleChange(props);
 };
 
 /**
  * Handles events associated to a radio input
  */
 const inputRadioHandleChange = props => {
-  return handleChange({ ...props, inputType: "radio" });
+  return commonHandleChange(props);
 };
 
 /**
  * Handles events associated to a text input
  */
 const inputTextHandleChange = props => {
-  return handleChange({ ...props, inputType: "text" });
+  return commonHandleChange(props);
 };
 
 export {
