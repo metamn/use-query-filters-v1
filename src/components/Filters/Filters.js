@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import { useQueryParams } from "use-query-params";
 
 import { getQueryParamsFromFilters, isFilterWellDefined } from "../../hooks";
+
 import Filter, { FilterPropTypes } from "../Filter";
 import FilterGroups, { FilterGroupsPropTypes } from "../FilterGroups";
 import data from "../../App.data";
@@ -40,6 +41,7 @@ const displayFilters = props => {
       {filters &&
         filters.map &&
         filters.map((filter, index) => {
+          console.log("xxx");
           /**
            * Only well defined filters will be displayed
            */

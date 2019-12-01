@@ -35,11 +35,6 @@ const defaultProps = {
   ]
 };
 
-const displayFilterGroup = props => {
-  const filters = findFilterByLabel(props);
-  return displayFilters({ filters: filters });
-};
-
 /**
  * Displays the component
  */
@@ -47,25 +42,13 @@ const FilterGroup = props => {
   const { label, isLabelDisplayed, filters, type, allFilters } = props;
 
   if (type && type === "standalone") {
-    return displayFilterGroup({ label: label, filters: allFilters });
+    const f = findFilterByLabel({ label: label, filters: allFilters });
+    return displayFilters({ filters: [f] });
   }
 
   return (
     <div className="FilterGroup">
       <div className="Label">{label}</div>
-      <div className="FiltersFromGroup">
-        {filters &&
-          filters.map &&
-          filters.map((filter, index) => {
-            const { label } = filter;
-
-            return (
-              <div key={index} className="FilterFroumGroup">
-                {displayFilterGroup({ label: label, filters: allFilters })}
-              </div>
-            );
-          })}
-      </div>
     </div>
   );
 };

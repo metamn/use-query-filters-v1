@@ -255,7 +255,7 @@ const data = {
   ]
 };
 
-const data1 = {
+const data2 = {
   filters: [
     {
       label: "Search",

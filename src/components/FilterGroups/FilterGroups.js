@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import { displayFilters } from "../Filters";
 import FilterGroup, {
   FilterGroupPropTypes,
   FilterGroupDefaultProps
