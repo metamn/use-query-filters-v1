@@ -1,7 +1,11 @@
 import React, { useContext } from "react";
 import PropTypes from "prop-types";
 
-import { InputSelectPropTypes, InputSelectDefaultProps } from "../../hooks";
+import {
+  InputSelectPropTypes,
+  InputSelectDefaultProps,
+  inputSelectHandleChange
+} from "../../hooks";
 import { QueryParamsContext } from "../Filters";
 
 /**
@@ -23,27 +27,6 @@ const InputSelect = props => {
    */
   const currentValue = queryParams[name] || "";
 
-  /**
-   * Sets up the holder for the new query param value
-   *
-   */
-  let newQueryParam = {};
-
-  /**
-   * Handles the checked value change
-   */
-  const handleChange = event => {
-    const { target } = event;
-    const { value } = target;
-
-    /**
-     * Sets the new query param value
-     */
-    newQueryParam[name] = value;
-
-    setQueryParams(newQueryParam);
-  };
-
   return (
     <div className="InputSelect">
       <label htmlFor={name}>{label}</label>
@@ -52,7 +35,13 @@ const InputSelect = props => {
         name={name}
         value={currentValue}
         multiple={false}
-        onChange={handleChange}
+        onChange={event =>
+          inputSelectHandleChange({
+            name: name,
+            event: event,
+            set: setQueryParams
+          })
+        }
       >
         {items &&
           items.map &&

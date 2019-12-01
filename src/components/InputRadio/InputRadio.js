@@ -1,7 +1,11 @@
 import React, { useContext } from "react";
 import PropTypes from "prop-types";
 
-import { InputRadioPropTypes, InputRadioDefaultProps } from "../../hooks";
+import {
+  InputRadioPropTypes,
+  InputRadioDefaultProps,
+  inputRadioHandleChange
+} from "../../hooks";
 import { QueryParamsContext } from "../Filters";
 
 /**
@@ -23,27 +27,6 @@ const InputRadio = props => {
    */
   const currentValue = queryParams[name] || "";
 
-  /**
-   * Sets up the holder for the new query param value
-   *
-   */
-  let newQueryParam = {};
-
-  /**
-   * Handles the checked value change
-   */
-  const handleChange = event => {
-    const { target } = event;
-    const { value } = target;
-
-    /**
-     * Sets the new query param value
-     */
-    newQueryParam[name] = value;
-
-    setQueryParams(newQueryParam);
-  };
-
   return (
     <div className="InputRadio">
       <div className="Label">{label}</div>
@@ -61,7 +44,13 @@ const InputRadio = props => {
                   value={value}
                   name={name}
                   checked={currentValue === value}
-                  onChange={handleChange}
+                  onChange={event =>
+                    inputRadioHandleChange({
+                      name: name,
+                      event: event,
+                      set: setQueryParams
+                    })
+                  }
                 />
                 <label htmlFor={name}>{label}</label>
               </div>
