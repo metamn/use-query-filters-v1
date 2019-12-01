@@ -1,6 +1,10 @@
 import React, { useContext } from "react";
 
-import { InputCheckboxPropTypes, InputCheckboxDefaultProps } from "../../hooks";
+import {
+  InputCheckboxPropTypes,
+  InputCheckboxDefaultProps,
+  inputCheckboxHandleChange
+} from "../../hooks";
 
 import { QueryParamsContext } from "../Filters";
 
@@ -26,37 +30,6 @@ const InputCheckbox = props => {
    */
   const currentValue = queryParams[name] || [];
 
-  /**
-   * Sets up the holder for the new query param value
-   *
-   */
-  let newQueryParam = {};
-
-  /**
-   * Handles the checked value change
-   */
-  const handleChange = event => {
-    const { target } = event;
-    const { checked, id } = target;
-
-    /**
-     * Defines the type of the new query param value
-     *
-     * - on DelimitedNumericArrayParam it must be integer, otherwise string
-     */
-    const idTyped =
-      queryParamType === "DelimitedNumericArrayParam" ? parseInt(id) : id;
-
-    /**
-     * Sets the new query param value
-     */
-    newQueryParam[name] = checked
-      ? [...currentValue, idTyped]
-      : currentValue.filter(item => item !== idTyped);
-
-    setQueryParams(newQueryParam);
-  };
-
   return (
     <div className="InputCheckbox">
       <div className="Label">{label}</div>
@@ -72,7 +45,15 @@ const InputCheckbox = props => {
                   id={value}
                   name={name}
                   checked={currentValue.find(item => item === value)}
-                  onChange={handleChange}
+                  onChange={event =>
+                    inputCheckboxHandleChange({
+                      name: name,
+                      event: event,
+                      set: setQueryParams,
+                      queryParamType: queryParamType,
+                      currentValue: currentValue
+                    })
+                  }
                 />
                 <label htmlFor={name}>{itemLabel}</label>
               </div>

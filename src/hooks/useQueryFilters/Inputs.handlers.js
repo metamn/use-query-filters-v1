@@ -3,6 +3,33 @@
  */
 
 /**
+ * Handles events associated to a checkbox input
+ */
+const inputCheckboxHandleChange = props => {
+  const { name, event, set, queryParamType, currentValue } = props;
+  const { target } = event;
+  const { checked, id } = target;
+
+  /**
+   * Defines the type of the new query param value
+   *
+   * - on DelimitedNumericArrayParam it must be integer, otherwise string
+   */
+  const idTyped =
+    queryParamType === "DelimitedNumericArrayParam" ? parseInt(id) : id;
+
+  /**
+   * Sets the new query param value
+   */
+  let newQueryParam = {};
+  newQueryParam[name] = checked
+    ? [...currentValue, idTyped]
+    : currentValue.filter(item => item !== idTyped);
+
+  set(newQueryParam);
+};
+
+/**
  * Handles events associated to a common set of inputs (text, radio, select ...)
  */
 const commonHandleChange = props => {
@@ -40,5 +67,6 @@ const inputTextHandleChange = props => {
 export {
   inputTextHandleChange,
   inputRadioHandleChange,
-  inputSelectHandleChange
+  inputSelectHandleChange,
+  inputCheckboxHandleChange
 };
