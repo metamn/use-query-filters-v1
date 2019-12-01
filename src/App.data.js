@@ -1,4 +1,63 @@
 const data = {
+  groups: [
+    {
+      label: "Borrowers",
+      filters: [
+        {
+          label: "Gender",
+          isLabelDisplayed: false
+        },
+        {
+          label: "Is Group?",
+          isLabelDisplayed: false
+        }
+      ]
+    },
+    {
+      label: "Location",
+      filters: [
+        {
+          label: "North America"
+        },
+        {
+          label: "Europe"
+        }
+      ]
+    },
+    {
+      label: "Sector",
+      type: "standalone"
+    },
+    {
+      label: "Attributes",
+      type: "standalone"
+    },
+    {
+      label: "Tags",
+      type: "standalone"
+    },
+    {
+      label: "Ratings",
+      isLabelDisplayed: false,
+      filters: [
+        {
+          label: "Risk rating"
+        },
+        {
+          label: "Delinquency rate"
+        },
+        {
+          label: "Default rate"
+        },
+        {
+          label: "Average cost to borrower"
+        },
+        {
+          label: "Profitability"
+        }
+      ]
+    }
+  ],
   filters: [
     {
       label: "Gender",
