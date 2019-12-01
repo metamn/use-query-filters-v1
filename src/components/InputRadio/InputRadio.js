@@ -34,12 +34,12 @@ const InputRadio = props => {
    */
   const handleChange = event => {
     const { target } = event;
-    const { id } = target;
+    const { value } = target;
 
     /**
      * Sets the new query param value
      */
-    newQueryParam[name] = id;
+    newQueryParam[name] = value;
 
     setQueryParams(newQueryParam);
   };
@@ -52,18 +52,18 @@ const InputRadio = props => {
         {items &&
           items.map &&
           items.map((item, index) => {
-            const { label: itemLabel, value } = item;
+            const { label, value } = item;
 
             return (
               <div className="Radio" key={index}>
                 <input
                   type="radio"
-                  id={value}
+                  value={value}
                   name={name}
                   checked={currentValue === value}
                   onChange={handleChange}
                 />
-                <label htmlFor={name}>{itemLabel}</label>
+                <label htmlFor={name}>{label}</label>
               </div>
             );
           })}

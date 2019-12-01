@@ -1,6 +1,10 @@
 import React, { useContext } from "react";
 
-import { InputTextPropTypes, InputTextDefaultProps } from "../../hooks";
+import {
+  InputTextPropTypes,
+  InputTextDefaultProps,
+  inputTextHandleChange
+} from "../../hooks";
 
 import { QueryParamsContext } from "../Filters";
 
@@ -24,26 +28,6 @@ const InputText = props => {
    */
   const currentValue = queryParams[name] || value;
 
-  /**
-   * Sets up the holder for the new query param value
-   */
-  let newQueryParam = {};
-
-  /**
-   * Handles the input value change
-   */
-  const handleChange = event => {
-    const { target } = event;
-    const { value } = target;
-
-    /**
-     * Sets the new query param value
-     */
-    newQueryParam[name] = value;
-
-    setQueryParams(newQueryParam);
-  };
-
   return (
     <div className="InputText">
       <label htmlFor={name}>{label}</label>
@@ -52,7 +36,13 @@ const InputText = props => {
         type="text"
         name={name}
         value={currentValue}
-        onChange={handleChange}
+        onChange={event =>
+          inputTextHandleChange({
+            name: name,
+            event: event,
+            set: setQueryParams
+          })
+        }
       />
     </div>
   );
